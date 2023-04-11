@@ -39,13 +39,24 @@ public class Matrix2x2
 public class FieldOfView : MonoBehaviour
 {
     // public Rigidbody2D rb;
-    // private CircleCollider2D agentCollider;
+    private CircleCollider2D agentCollider;
 
-    // private Agent agent;
-    public float visLong = 3.0f;
-    public float visWide = 2.0f;
+    private Agent agent;
+    public float visLong;
+    public float visWide;
+
+    public float myPersonalSpace;
+
+    public bool useNaive = true;
+
+    public float myRadius;
 
     public float detectionRadius = 5.0f; // The range within which agents will be detected
+
+    Agent[] allAgents;
+    // List<Agent> otherAgents;
+
+    Wall[] allWalls;
 
     public LayerMask agentMask;
     public LayerMask wallMask;
@@ -59,36 +70,57 @@ public class FieldOfView : MonoBehaviour
     [HideInInspector]
     public List<Transform> visibleFallenAgents = new List<Transform>();
 
+    [HideInInspector]
+    public List<Transform> collidedAgents = new List<Transform>();
+
+    [HideInInspector]
+    public List<Transform> collidedWalls = new List<Transform>();
+
+    [HideInInspector]
+    public List<Transform> collidedObstacles = new List<Transform>();
+
     void Start()
     {
         agentMask = LayerMask.GetMask("Agent");
         wallMask = LayerMask.GetMask("Wall");
         fallenAgentMask = LayerMask.GetMask("FallenAgent");
         obstacleMask = LayerMask.GetMask("Obstacle");
-        StartCoroutine(FindTargetsWithDelay(0.2f));
-        // rb = this.GetComponent<Rigidbody2D>();
-        // agentCollider = GetComponent<CircleCollider2D>();
-        // agent = GetComponent<Agent>();
+        allAgents = FindObjectsOfType<Agent>();
+        agent = GetComponent<Agent>();
+        agentCollider = GetComponent<CircleCollider2D>();
+        myRadius = agentCollider.radius;
+        allWalls = FindObjectsOfType<Wall>();
+        myPersonalSpace = agent.getPersonalSpace();
+        // StartCoroutine(FindTargetsWithDelay(0.2f));
+
     }
 
-    IEnumerator FindTargetsWithDelay(float delay)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(delay);
-            FindVisibleTargets();
-        }
-    }
+    // IEnumerator FindTargetsWithDelay(float delay)
+    // {
+    //     while (true)
+    //     {
+    //         yield return new WaitForSeconds(delay);
+    //         FindVisibleTargets();
+    //     }
+    // }
 
-    void FindVisibleTargets()
+    public void FindVisibleTargets()
     {
         visibleAgents.Clear();
         visibleWalls.Clear();
         visibleFallenAgents.Clear();
+        collidedAgents.Clear();
+        collidedObstacles.Clear();
+        collidedWalls.Clear();
+        if (!useNaive) {
+            FindVisibleObjects(agentMask, visibleAgents);
+            FindVisibleObjects(wallMask, visibleWalls);
+            FindVisibleObjects(fallenAgentMask, visibleFallenAgents);
+        }
+        else {
+            FindPossibleCollidersNaive();
+        }
 
-        FindVisibleObjects(agentMask, visibleAgents);
-        FindVisibleObjects(wallMask, visibleWalls);
-        FindVisibleObjects(fallenAgentMask, visibleFallenAgents);
     }
 
     void OnDrawGizmos()
@@ -116,6 +148,57 @@ public class FieldOfView : MonoBehaviour
 
         // Reset the Gizmos matrix to the previous value
         Gizmos.matrix = oldGizmosMatrix;
+    }
+
+    void FindPossibleCollidersNaive()
+    {
+        //Update values that may have changed
+        myPersonalSpace = agent.getPersonalSpace();
+        visLong = agent.vislong;
+        visWide = agent.viswide;
+        Vector2 myPos = agent.transform.position;
+        float alpha = transform.eulerAngles.z;
+        float alphaRadians = alpha * Mathf.Deg2Rad;
+        Vector2 myDir = new Vector2(Mathf.Cos(alphaRadians), Mathf.Sin(alphaRadians));
+        myDir.Normalize();
+        
+
+        foreach(Agent otheragent in allAgents)
+        {
+            if (otheragent == agent) { //SKIP FINDING YOURSELF
+                continue;
+            }
+
+            Vector2 otherPos = otheragent.transform.position;
+            float otherRadius = otheragent.radius;
+            
+            // float distance = (myPos - otherPos).magnitude - otherRadius;
+
+            float d = GeometryUtils.PtToLineDist(otherPos, myPos, myDir, visLong);
+
+            float er = otherRadius + visWide;
+            Vector2 meToYou = otherPos - myPos;
+            // Debug.Log("MeToYOu: " + meToYou + ", myDir: " + myDir + gameObject.name);
+            if (d <= er && Vector2.Dot(meToYou, myDir) > 0) {
+                visibleAgents.Add(otheragent.transform);
+                // Debug.Log("Found agent");
+            }
+                
+
+            //CHECK FOR COLLISION
+            float distance = (myPos - otherPos).magnitude;
+
+            if (distance < myRadius + myPersonalSpace) {
+                collidedAgents.Add(otheragent.transform);
+            }
+        }
+
+        foreach(Wall wall in allWalls)
+        {
+
+        }
+
+
     }
 
     void FindVisibleObjects(LayerMask targetMask, List<Transform> visibleList)
