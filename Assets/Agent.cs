@@ -73,6 +73,12 @@ public class Agent : MonoBehaviour, CrowdObject {
             // otherVel = visibleAgentRigidbody.velocity;
         Vector2 otherVel = otherAgent.getVelocity();
 
+        //Other Agent Avoidance: Overtaking and bi-directional flow
+        //that agent is walking in the opposite direction and with distance smaller than vislong-1.5
+        if (Vector2.Dot(otherVel.normalized, vel.normalized) > 0.8 && meToYou.magnitude > vislong - 1.5 ) {
+            return Vector2.zero;
+        }
+
 
         Vector2 tforce = GeometryUtils.CrossAndRecross(meToYou, vel);
         tforce.Normalize();
@@ -107,7 +113,7 @@ public class Agent : MonoBehaviour, CrowdObject {
         {
             Debug.Log("meToYou" + meToYou + ", magnitude: " + meToYou.magnitude + ", waitingRadius: " + waitingRadius);
             waiting = true;
-            waitTime = rand.Next(1,100);
+            waitTime = rand.Next(1,50);
             Debug.Log("AGENT " + gameObject.name + " IS WAITING");
         }
 
@@ -121,7 +127,7 @@ public class Agent : MonoBehaviour, CrowdObject {
         // Debug.Log("Position: " + pos);
         rb = this.GetComponent<Rigidbody2D>();
         fieldOfView = GetComponent<FieldOfView>();
-        agentCollisionHandler = GetComponent<AgentCollisionHandler>();
+        agentCollisionHandler = this.GetComponent<AgentCollisionHandler>();
         agentCollider = GetComponent<CircleCollider2D>();
         lastPos = transform.position;
         radius = agentCollider.radius;
@@ -298,7 +304,7 @@ public class Agent : MonoBehaviour, CrowdObject {
         {
             Debug.Log("STOPPING");
             stopping = true;
-            stoptime = rand.Next(1,250);
+            stoptime = rand.Next(1,150);
             vel = Vector2.zero;
         }
 
@@ -339,7 +345,7 @@ public class Agent : MonoBehaviour, CrowdObject {
         // Debug.Log("AGENT " + gameObject.name + " IS MOVING TO " + ((Vector2) (transform.position) + (move ) + repelForce) + " FROM " + (Vector2) (transform.position));
 
         // Vector2 lastPos = transform.position;
-        rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime + 0.2f*repelForce);
+        rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime + repelForce.normalized);
         // rb.MovePosition(Vector2.zero);
         vel = ( (Vector2)transform.position - lastPos ) / Time.fixedDeltaTime; 
         Vector2 dir = vel.normalized;
@@ -366,6 +372,7 @@ public class Agent : MonoBehaviour, CrowdObject {
         waiting = false;
         // vislong = 3.0f;
         fieldOfView.visLong = vislong;
+        fieldOfView.visWide = viswide;
         rightHandAngleMultiplier = 1.0f;
         num_agents_ahead = 0;
         repelForce = Vector2.zero;
