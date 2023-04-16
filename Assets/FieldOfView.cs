@@ -150,6 +150,8 @@ public class FieldOfView : MonoBehaviour
         Gizmos.matrix = oldGizmosMatrix;
     }
 
+
+//--------------------------------NAIVE FUNCTIONS START------------------------------------
     void FindPossibleCollidersNaive()
     {
         //Update values that may have changed
@@ -196,10 +198,121 @@ public class FieldOfView : MonoBehaviour
         foreach(Wall wall in allWalls)
         {
 
+            if (AgentHasVisionOfWall(myPos, alpha, visLong, visWide, wall.getStart(), wall.getEnd())) {
+                visibleWalls.Add(wall.transform);
+            }
+
+            if (AgentHasCollisionWithWall(myPos, alpha, visLong, visWide, wall.getStart(), wall.getEnd(), transform.localScale.y)) {
+                collidedWalls.Add(wall.transform);
+            }
         }
 
 
     }
+
+
+    //SIMPLIFIED FUNCTION, DON'T ACCOUNT FOR THICKNESS OF WALL
+    public static bool AgentHasVisionOfWall(Vector2 agentPosition, float theta, float vislong, float viswide, Vector2 start, Vector2 end)
+    {
+        // Calculate rotation matrix
+        float[,] R = new float[,]
+        {
+            { Mathf.Cos(theta), -Mathf.Sin(theta) },
+            { Mathf.Sin(theta),  Mathf.Cos(theta) }
+        };
+
+        // Rotate wall coordinates
+        Vector2 r_start = RotateAndTranslate(R, start, agentPosition);
+        Vector2 r_end = RotateAndTranslate(R, end, agentPosition);
+
+        // Check if wall is within agent's FOV
+        //TODO : ADD SO THE START AND END POINTS DOESN'T NEED TO BE IN THE RECTANGLE, ONLY THE LINE, or does it already?
+        if ((r_start.x < 0 && r_end.x < 0) || (r_start.x > vislong && r_end.x > vislong) ||
+            (r_start.y < -viswide / 2 && r_end.y < -viswide / 2) || (r_start.y > viswide / 2 && r_end.y > viswide / 2))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static bool AgentHasCollisionWithWall(Vector2 agentPosition, float theta, float vislong, float viswide, Vector2 start, Vector2 end, float thickness)
+    {
+        // Calculate rotation matrix
+        float[,] R = new float[,]
+        {
+            { Mathf.Cos(theta), -Mathf.Sin(theta) },
+            { Mathf.Sin(theta),  Mathf.Cos(theta) }
+        };
+
+        // Rotate wall coordinates
+        Vector2 r_start = RotateAndTranslate(R, start, agentPosition);
+        Vector2 r_end = RotateAndTranslate(R, end, agentPosition);
+
+        // Calculate wall vector and normalize it
+        Vector2 wallDirection = (r_end - r_start).normalized;
+
+        // Calculate wall normal
+        Vector2 wallNormal = new Vector2(-wallDirection.y, wallDirection.x);
+
+        // Calculate the new start and end points considering the wall thickness
+        Vector2 halfThicknessOffset = wallNormal * (thickness / 2);
+        Vector2 r_start1 = r_start + halfThicknessOffset;
+        Vector2 r_start2 = r_start - halfThicknessOffset;
+        Vector2 r_end1 = r_end + halfThicknessOffset;
+        Vector2 r_end2 = r_end - halfThicknessOffset;
+
+        // Define agent's FOV rectangle vertices
+        Vector2[] fovVertices = new Vector2[]
+        {
+            new Vector2(0, -viswide / 2),
+            new Vector2(vislong, -viswide / 2),
+            new Vector2(vislong, viswide / 2),
+            new Vector2(0, viswide / 2)
+        };
+
+        // Check if any FOV vertex is inside the wall rectangle
+        if (IsPointInsideRectangle(fovVertices[0], r_start1, r_start2, r_end1, r_end2) ||
+            IsPointInsideRectangle(fovVertices[1], r_start1, r_start2, r_end1, r_end2) ||
+            IsPointInsideRectangle(fovVertices[2], r_start1, r_start2, r_end1, r_end2) ||
+            IsPointInsideRectangle(fovVertices[3], r_start1, r_start2, r_end1, r_end2))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static Vector2 RotateAndTranslate(float[,] R, Vector2 point, Vector2 agentPosition)
+    {
+        Vector2 translatedPoint = point - agentPosition;
+        Vector2 rotatedPoint = new Vector2(
+            R[0, 0] * translatedPoint.x + R[0, 1] * translatedPoint.y,
+            R[1, 0] * translatedPoint.x + R[1, 1] * translatedPoint.y
+        );
+
+        return rotatedPoint;
+    }
+
+    private static bool IsPointInsideRectangle(Vector2 point, Vector2 rectA, Vector2 rectB, Vector2 rectC, Vector2 rectD)
+    {
+        float areaRectangle = TriangleArea(rectA, rectB, rectC) + TriangleArea(rectA, rectC, rectD);
+        float areaSum = TriangleArea(point, rectA, rectB) +
+                        TriangleArea(point, rectB, rectC) +
+                        TriangleArea(point, rectC, rectD) +
+                        TriangleArea(point, rectD, rectA);
+
+        // Use an epsilon value to account for floating-point rounding errors
+        float epsilon = 0.0001f;
+        return Mathf.Abs(areaRectangle - areaSum) < epsilon;
+    }
+
+    private static float TriangleArea(Vector2 a, Vector2 b, Vector2 c)
+    {
+        return Mathf.Abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) / 2);
+    }
+
+//---------------------------NAIVE FUNCTIONS END-------------------------------------------------------
 
     void FindVisibleObjects(LayerMask targetMask, List<Transform> visibleList)
     {

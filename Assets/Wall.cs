@@ -19,7 +19,11 @@ public class Wall : MonoBehaviour, CrowdObject
         float radians = wallRotation * Mathf.Deg2Rad;
         wallNormal = new Vector2(Mathf.Cos(radians + Mathf.PI / 2), Mathf.Sin(radians + Mathf.PI / 2));
 
-        Debug.Log("Wall normal: " + wallNormal);
+        start = new Vector2(transform.position.x + Mathf.Cos(radians) * transform.localScale.x/2, transform.position.y + Mathf.Sin(radians) * transform.localScale.x/2); //TODO : CHECK START AND END
+
+        end = new Vector2(transform.position.x + Mathf.Cos(radians - Mathf.PI) * transform.localScale.x/2, transform.position.y + Mathf.Sin(radians - Mathf.PI) * transform.localScale.x/2);
+
+        Debug.Log("Wall normal: " + wallNormal + ", start: " + start + ", end: " + end);
         
     }
 
@@ -60,23 +64,15 @@ public class Wall : MonoBehaviour, CrowdObject
     private Vector2 start;
     private Vector2 end;
 
-    public Wall() { }
-
-    public Wall(Vector2 s, Vector2 e)
-    {
-        start = s;
-        end = e;
-        myType = ObjType.WALL;
-        Vector2 w = end - start;
-        Vector2 tangent = new Vector2(w.y, -w.x);
-        norm = tangent.normalized;
-    }
-
     public Vector2 pos { get; set; }
     public Vector2 norm { get; set; }
     public ObjType myType { get; set; }
 
+    public Vector2 getStart() => start;
+
     public Vector2 getPos() => start;
+
+    public Vector2 getEnd() => end;
     public float getRadius() => 0.0f;
 
     public bool isVisible(Vector2 pos, Vector2 dir, float vislength, float viswidth)
@@ -148,7 +144,7 @@ public class Wall : MonoBehaviour, CrowdObject
 
     public Vector2 getVelocity() => Vector2.zero;
 
-    public Vector2 StartW
+    public Vector2 Startw
     {
         get => start;
         set => start = value;

@@ -109,7 +109,7 @@ public class Agent : MonoBehaviour, CrowdObject {
         Vector2 myDir = vel.normalized;
         Vector2 otherDir = otherVel.normalized;
     
-        if (Vector2.Dot(myDir, otherDir) >= 0.755f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
+        if (Vector2.Dot(myDir, otherDir) >= 0.655f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
         {
             Debug.Log("meToYou" + meToYou + ", magnitude: " + meToYou.magnitude + ", waitingRadius: " + waitingRadius);
             waiting = true;
@@ -248,6 +248,7 @@ public class Agent : MonoBehaviour, CrowdObject {
         //CASE WALL ----------------------------------------------------------------
         foreach (Transform visibleWall in fieldOfView.visibleWalls)
         {
+            Debug.Log("SEE WALL");
             Vector2 wallNorm = Vector2.zero;
 
             float distance = (visibleWall.position - transform.position).magnitude;
@@ -266,21 +267,43 @@ public class Agent : MonoBehaviour, CrowdObject {
             tempForce *= wallWeight;
             currentForce += tempForce;
 
-            if (agentCollisionHandler.collidedObjects.Contains(visibleWall))
-            {
-                lambda = 0.3f;
-                // Interact with visible and collided walls
-                float k = (agentCollider.radius + personalSpace - distance) / distance;
-                Vector2 currWallRepelForce = wallNorm * k;
+            // if (agentCollisionHandler.collidedObjects.Contains(visibleWall))
+            // {
+            //     lambda = 0.3f;
+            //     // Interact with visible and collided walls
+            //     float k = (agentCollider.radius + personalSpace - distance) / distance;
+            //     Vector2 currWallRepelForce = wallNorm * k;
 
-                if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
-                {
-                    repelForceFromWalls += currWallRepelForce;
-                }
+            //     if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
+            //     {
+            //         repelForceFromWalls += currWallRepelForce;
+            //     }
 
-            }
+            // }
 
             
+        }
+
+        //Repulsion forces with other walls
+        foreach( Transform collidedWall in fieldOfView.collidedWalls)
+        {
+            Debug.Log("COLLIDING WITH WALL");
+            float distance = (collidedWall.position - transform.position).magnitude;
+            lambda = 0.3f;
+            BoxCollider2D wallCollider = collidedWall.GetComponent<BoxCollider2D>();
+            // Interact with visible and collided walls
+            float k = (agentCollider.radius + personalSpace - distance) / distance;
+
+            float wallRotation = wallCollider.transform.eulerAngles.z;
+            float radians = wallRotation * Mathf.Deg2Rad;
+            Vector2 wallNorm = new Vector2(Mathf.Cos(radians + Mathf.PI / 2), Mathf.Sin(radians + Mathf.PI / 2));
+
+            Vector2 currWallRepelForce = wallNorm * k;
+
+            if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
+            {
+                repelForceFromWalls += currWallRepelForce;
+            }
         }
 
         //CASE FALLEN AGENT -------------------------------------------------------
@@ -345,7 +368,7 @@ public class Agent : MonoBehaviour, CrowdObject {
         // Debug.Log("AGENT " + gameObject.name + " IS MOVING TO " + ((Vector2) (transform.position) + (move ) + repelForce) + " FROM " + (Vector2) (transform.position));
 
         // Vector2 lastPos = transform.position;
-        rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime + repelForce.normalized);
+        rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime + 0.1f*repelForce);
         // rb.MovePosition(Vector2.zero);
         vel = ( (Vector2)transform.position - lastPos ) / Time.fixedDeltaTime; 
         Vector2 dir = vel.normalized;
