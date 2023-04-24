@@ -8,7 +8,8 @@ using System;
 
 
 
-public class Agent : MonoBehaviour, CrowdObject {
+public class Agent : MonoBehaviour, CrowdObject
+{
 
 
     public const float epsilon = 0.05f;
@@ -20,9 +21,6 @@ public class Agent : MonoBehaviour, CrowdObject {
     private Vector2 prevForce = new Vector2(0, 0);
 
     public float detectionRadius = 5.0f; // The range within which agents will be detected
-
-    // public float angleInDegrees = 0.0f; // The angle
-    // public float angleInRadians = 0.0f; // The angle
 
     public Rigidbody2D rb;
     // Start is called before the first frame update
@@ -62,20 +60,21 @@ public class Agent : MonoBehaviour, CrowdObject {
 
 
 
-        // Follows equation 6, 7, 8, 9
-    Vector2 calcAgentForce(Transform visibleAgent)
+    // Follows equation 6, 7, 8, 9
+    Vector2 calcAgentForce(Transform visibleAgent) // Agent avoidance force
     {
         Vector2 meToYou = visibleAgent.position - transform.position;
 
         Rigidbody2D visibleAgentRigidbody = visibleAgent.GetComponent<Rigidbody2D>();
         Agent otherAgent = visibleAgent.GetComponent<Agent>();
-            // Access the visible agent's velocity
-            // otherVel = visibleAgentRigidbody.velocity;
+        // Access the visible agent's velocity
+        // otherVel = visibleAgentRigidbody.velocity;
         Vector2 otherVel = otherAgent.getVelocity();
 
         //Other Agent Avoidance: Overtaking and bi-directional flow
-        //that agent is walking in the opposite direction and with distance smaller than vislong-1.5
-        if (Vector2.Dot(otherVel.normalized, vel.normalized) > 0.8 && meToYou.magnitude > vislong - 1.5 ) {
+        //that agent is walking in the opposite direction and with distance smaller than vislong-1.5 
+        if (Vector2.Dot(otherVel.normalized, vel.normalized) > 0.8 && meToYou.magnitude > vislong - 1.5)
+        { // ?
             return Vector2.zero;
         }
 
@@ -96,9 +95,9 @@ public class Agent : MonoBehaviour, CrowdObject {
         }
 
         // Debug.Log( "Dotproduct between the 2 velocities: " + Mathf.Abs(Vector2.Dot(vel, otherVel)) + " with vels " + vel + " and " + otherVel);
-        if (Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized) - 1) <= epsilon * rightHandAngleMultiplier || 
+        if (Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized) - 1) <= epsilon * rightHandAngleMultiplier ||
             Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized) + 1) <= epsilon * rightHandAngleMultiplier ||
-            Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) - 1) <= epsilon * rightHandAngleMultiplier  ||
+            Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) - 1) <= epsilon * rightHandAngleMultiplier ||
             Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) + 1) <= epsilon * rightHandAngleMultiplier)
         {
             // Debug.Log("RIGHT HAND RULE APPLIED FOR AGENT " + gameObject.name);
@@ -108,12 +107,12 @@ public class Agent : MonoBehaviour, CrowdObject {
 
         Vector2 myDir = vel.normalized;
         Vector2 otherDir = otherVel.normalized;
-    
+
         if (Vector2.Dot(myDir, otherDir) >= 0.655f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
         {
             Debug.Log("meToYou" + meToYou + ", magnitude: " + meToYou.magnitude + ", waitingRadius: " + waitingRadius);
             waiting = true;
-            waitTime = rand.Next(1,50);
+            waitTime = rand.Next(1, 50);
             Debug.Log("AGENT " + gameObject.name + " IS WAITING");
         }
 
@@ -151,18 +150,12 @@ public class Agent : MonoBehaviour, CrowdObject {
 
         currentForce += forceAttractor;
 
-        // Debug.Log("Current force: " + currentForce);
 
-        // vel = rb.velocity;
-
-        // Debug.Log("Current vel: " + vel);
 
         fieldOfView.FindVisibleTargets();
-        //CASE AGENT --------------------------------------------------------------
-        foreach (Transform visibleAgent in fieldOfView.visibleAgents) 
+        //CASE AGENT -------------------------------------------------------------- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        foreach (Transform visibleAgent in fieldOfView.visibleAgents)
         {
-            // Debug.Log("I SEE AGENT");
-            
             Rigidbody2D visibleAgentRigidbody = visibleAgent.GetComponent<Rigidbody2D>();
             CircleCollider2D visibleAgentCircleCollider = visibleAgent.GetComponent<CircleCollider2D>();
             float visibleAgentRadius = visibleAgentCircleCollider.radius;
@@ -173,76 +166,41 @@ public class Agent : MonoBehaviour, CrowdObject {
 
             float distance = Vector3.Distance(transform.position, visibleAgent.position);
 
-            
             if (distance < R && Vector2.Dot(direction, vel) > 0) //A semi circle
             {
                 num_agents_ahead++;
             }
 
-
-
-            currentForce += calcAgentForce(visibleAgent) * agentWeight; //NORMAL FORCES
-
-            //TODO : SWITCH ALL THESE COLLIDER LOGIC OUTSIDE OF FOV LOGIC
-            if (agentCollisionHandler.collidedObjects.Contains(visibleAgent)) //REPULSION FORCES
-            {
-
-                // i is this agent, j is the other agent
-                // d_ji is the distance between their centers
-                // ep is the person
-                // formula for agent: (pos_i - pos_j)*(r_i + ep_i + r_j - d_ji)/ d_ji
-
-                // Interact with visible and collided agents
-                // Vector2 jtoi = transform.position - visibleAgent.position;
-
-                // Vector2 v_j = Vector2.zero; //TODO : NOT NEEDED
-
-                // if (otherAgent != null)
-                // {
-                //     // Access the visible agent's velocity
-                //     v_j = otherAgent.getVelocity();
-                // }
-
-                // if (visibleAgentCircleCollider != null) 
-                // {
-                //     visibleAgentRadius = visibleAgentCircleCollider.radius;
-                // }
-
-                // float k = (agentCollider.radius + personalSpace + jtoi.magnitude - visibleAgentRadius) / (jtoi.magnitude + visibleAgentRadius);
-
-                // repelForceFromAgents += jtoi * k;
-                
-            }
-
+            currentForce += calcAgentForce(visibleAgent) * agentWeight; //NORMAL FORCES  AVOIDANCE forces
         }
-        
+
         //Repulsion forces with other agents!!!
-        foreach(Transform collidedAgent in fieldOfView.collidedAgents)
+        foreach (Transform collidedAgent in fieldOfView.collidedAgents)
         {
-                // i is this agent, j is the other agent
-                // d_ji is the distance between their centers
-                // ep is the person
-                // formula for agent: (pos_i - pos_j)*(r_i + ep_i + r_j - d_ji)/ d_ji
-                Agent otherAgent = collidedAgent.GetComponent<Agent>();
-                Rigidbody2D collidedAgentRigidbody = collidedAgent.GetComponent<Rigidbody2D>();
-                CircleCollider2D collidedAgentCircleCollider = collidedAgent.GetComponent<CircleCollider2D>();
+            // i is this agent, j is the other agent
+            // d_ji is the distance between their centers
+            // ep is the person
+            // formula for agent: (pos_i - pos_j)*(r_i + ep_i + r_j - d_ji)/ d_ji
+            Agent otherAgent = collidedAgent.GetComponent<Agent>();
+            Rigidbody2D collidedAgentRigidbody = collidedAgent.GetComponent<Rigidbody2D>();
+            CircleCollider2D collidedAgentCircleCollider = collidedAgent.GetComponent<CircleCollider2D>();
 
-                // Interact with collided agents
-                Vector2 jtoi = transform.position - collidedAgent.position;
+            // Interact with collided agents
+            Vector2 jtoi = transform.position - collidedAgent.position;
 
-                Vector2 v_j = Vector2.zero; //TODO : NOT NEEDED
+            Vector2 v_j = Vector2.zero; //TODO : NOT NEEDED
 
 
-                // Access the collided agent's velocity
-                v_j = otherAgent.getVelocity();
-                
+            // Access the collided agent's velocity
+            v_j = otherAgent.getVelocity();
 
-                float collidedAgentRadius = collidedAgentCircleCollider.radius;
-                
 
-                float k = (agentCollider.radius + personalSpace + collidedAgentRadius - jtoi.magnitude) / (jtoi.magnitude);
+            float collidedAgentRadius = collidedAgentCircleCollider.radius;
 
-                repelForceFromAgents += jtoi * k;
+
+            float k = (agentCollider.radius + personalSpace + collidedAgentRadius - jtoi.magnitude) / (jtoi.magnitude);
+
+            repelForceFromAgents += jtoi * k;
         }
 
         //CASE WALL ----------------------------------------------------------------
@@ -266,26 +224,10 @@ public class Agent : MonoBehaviour, CrowdObject {
             tempForce.Normalize();
             tempForce *= wallWeight;
             currentForce += tempForce;
-
-            // if (agentCollisionHandler.collidedObjects.Contains(visibleWall))
-            // {
-            //     lambda = 0.3f;
-            //     // Interact with visible and collided walls
-            //     float k = (agentCollider.radius + personalSpace - distance) / distance;
-            //     Vector2 currWallRepelForce = wallNorm * k;
-
-            //     if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
-            //     {
-            //         repelForceFromWalls += currWallRepelForce;
-            //     }
-
-            // }
-
-            
         }
 
         //Repulsion forces with other walls
-        foreach( Transform collidedWall in fieldOfView.collidedWalls)
+        foreach (Transform collidedWall in fieldOfView.collidedWalls)
         {
             Debug.Log("COLLIDING WITH WALL");
             float distance = (collidedWall.position - transform.position).magnitude;
@@ -300,26 +242,13 @@ public class Agent : MonoBehaviour, CrowdObject {
 
             Vector2 currWallRepelForce = wallNorm * k;
 
-            if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
+            if (Vector2.Dot(currWallRepelForce, vel) <= 0.0f)
             {
                 repelForceFromWalls += currWallRepelForce;
             }
         }
 
         //CASE FALLEN AGENT -------------------------------------------------------
-        // foreach (Transform visibleFallenAgent in fieldOfView.visibleFallenAgents)
-        // {
-
-        //     //NOT IMPLEMENTED YET
-
-        //     if (agentCollisionHandler.collidedObjects.Contains(visibleFallenAgent))
-        //     {
-        //         // Interact with visible and collided fallen agents
-        //         // NO REPULSION WITH FALLEN AGENTS
-        //     }
-        // }
-
-        // gameObject.transform.position = new Vector3(pos.x, pos.y, 0);
         repelForceFromAgents *= lambda;
         repelForce = repelForceFromAgents + repelForceFromWalls;
 
@@ -327,7 +256,7 @@ public class Agent : MonoBehaviour, CrowdObject {
         {
             Debug.Log("STOPPING");
             stopping = true;
-            stoptime = rand.Next(1,150);
+            stoptime = rand.Next(1, 150);
             vel = Vector2.zero;
         }
 
@@ -338,21 +267,13 @@ public class Agent : MonoBehaviour, CrowdObject {
 
         //CurrentForce is already filled up
 
-        
+
 
         currentForce.Normalize(); //Normalize force vector
 
         prevForce = currentForce;
 
-        // Debug.Log("Normalized force vec: " + currentForce);
 
-
-
-
-        //TIME TO APPLY FORCES
-        // if (vel != Vector2.zero) { 
-
-        // }        
         float alpha = computeAlpha();
         // Debug.Log("Alpha: " + alpha);
         Beta = 0; //For now when no fallen agents
@@ -362,15 +283,15 @@ public class Agent : MonoBehaviour, CrowdObject {
         float velMagnitude = computeVel(Time.fixedDeltaTime);
         // velMagnitude = 2.5f;
         // Debug.Log("velMagnitude: " + velMagnitude);
-        float moveFactor = alpha*velMagnitude;
-        Vector2 move = moveFactor * ((1 - Beta)*currentForce + Beta*fallenAgentVec);
+        float moveFactor = alpha * velMagnitude;
+        Vector2 move = moveFactor * ((1 - Beta) * currentForce + Beta * fallenAgentVec);
         // Vector2 desiredPosition = move + repelForce;
         // Debug.Log("AGENT " + gameObject.name + " IS MOVING TO " + ((Vector2) (transform.position) + (move ) + repelForce) + " FROM " + (Vector2) (transform.position));
 
         // Vector2 lastPos = transform.position;
-        rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime + 0.1f*repelForce);
-        // rb.MovePosition(Vector2.zero);
-        vel = ( (Vector2)transform.position - lastPos ) / Time.fixedDeltaTime; 
+        rb.MovePosition((Vector2)(transform.position) + (move) * Time.fixedDeltaTime + 0.1f * repelForce); // New desired position!
+
+        vel = ((Vector2)transform.position - lastPos) / Time.fixedDeltaTime;
         Vector2 dir = vel.normalized;
         float angleInRadians = Mathf.Atan2(dir.y, dir.x);
         float angleInDegrees = angleInRadians * Mathf.Rad2Deg;
@@ -379,10 +300,10 @@ public class Agent : MonoBehaviour, CrowdObject {
         // Debug.Log("angle " + rb.rotation);
         // Debug.Log("Pos: " + transform.position + ", last pos: " + lastPos + ", deltaT: " + Time.fixedDeltaTime); 
         lastPos = transform.position;
-        
-        rb.velocity = vel; 
 
-        
+        rb.velocity = vel;
+
+
 
         //RESET
         stoptime--;
@@ -410,12 +331,10 @@ public class Agent : MonoBehaviour, CrowdObject {
     //Seed generator
     private static System.Random rand = new System.Random();
 
-
-
-
     // // Position - will assume continuous for now
     private Vector2 _pos;
-    public Vector2 pos {
+    public Vector2 pos
+    {
         get => _pos;
         set => _pos = value;
     }
@@ -444,8 +363,8 @@ public class Agent : MonoBehaviour, CrowdObject {
 
     public float personalSpace = 1.0f;
 
-    public float acceleration = 0.8f;
-    public float maxVelocity = 0.5f;
+    public float acceleration = 0.1f;
+    public float maxVelocity = 0.1f;
 
 
     // The "size" of the agent
@@ -458,14 +377,6 @@ public class Agent : MonoBehaviour, CrowdObject {
     // float densityAhead;
 
     int num_agents_ahead = 0;
-
-    // States whether an agent is colliding with another
-    // bool isColliding = false;
-    // List<CrowdObject> collideObjects = new List<CrowdObject>();
-
-    // // Lists of visible objects
-    // // Should probably be pointers, will change when needed 
-    // List<CrowdObject> visObjects = new List<CrowdObject>();
 
     // Whether agent is stopping or waiting
     bool stopping = false;
@@ -501,7 +412,8 @@ public class Agent : MonoBehaviour, CrowdObject {
     // Attractor
     public Vector2 attractor;
 
-    float computeVel(float deltaT) {
+    float computeVel(float deltaT)
+    {
         // Implementation goes here
         if (vel.magnitude > maxVelocity)
             // return getSpeed();
@@ -518,7 +430,8 @@ public class Agent : MonoBehaviour, CrowdObject {
         }
     }
 
-    float computeAlpha() {
+    float computeAlpha()
+    {
         // Implementation goes here
         if (repelForce.magnitude > 0.0 || stopping || waiting)
             return 0.0f;
@@ -527,7 +440,8 @@ public class Agent : MonoBehaviour, CrowdObject {
     }
 
     //TODO : DOES NOTHING ATM
-    void computeFallen(Vector2 ret) {
+    void computeFallen(Vector2 ret)
+    {
         // Implementation goes here
     }
 
@@ -544,31 +458,35 @@ public class Agent : MonoBehaviour, CrowdObject {
 
     // public void print() {
     //     // Implementation goes here, TODO : CONVERT POS TO UNITY POS
-        
+
     //     gameObject.transform.position = new Vector3(pos.x, pos.y, 0);
     //     // Debug.Log("UPDATED");
     // }
 
 
 
-    void setVelocity(Vector2 set) {
+    void setVelocity(Vector2 set)
+    {
         // Implementation goes here
         vel = set;
     }
 
-    float getSpeed() {
+    float getSpeed()
+    {
         // Implementation goes here
         return 0.0f;
     }
 
 
-    public float getPersonalSpace() {
+    public float getPersonalSpace()
+    {
         // Implementation goes here
         return personalSpace;
     }
 
 
-    void setPos(Vector2 set) {
+    void setPos(Vector2 set)
+    {
         // Implementation goes here
         pos = set;
     }
@@ -601,7 +519,7 @@ public class Agent : MonoBehaviour, CrowdObject {
     // // Functions to update visibility and collision vectors
     // public void checkCollide(CrowdObject c) {
     //     // Implementation goes here
-        
+
     //     if ( getDistance( c.getPos() ) < radius + personalSpace) //TODO : CHANGE FROM RADIUS TO PERSONALSPACE? FOR PROPER COLLISIONS? OR EACH AGENTS GETS DIFFERENT RADIUS?
     //     {
     //         Debug.Log("COLLISION FOR " + gameObject.name);
@@ -660,7 +578,7 @@ public class Agent : MonoBehaviour, CrowdObject {
 
         // Compute effective pos /radius/ along the normal line (to avoid looking behind oneself
         float d = GeometryUtils.PtToLineDist(getPos(), objPos, objDir, visLength);
-        
+
         float er = getRadius() + visWidth;
         if (d <= er)
             return true;
@@ -683,7 +601,7 @@ public class Agent : MonoBehaviour, CrowdObject {
 
     public Vector2 getDirection()
     {
-        if (getSpeed() >= 0.0f + epsilon) 
+        if (getSpeed() >= 0.0f + epsilon)
         {
             norm = vel.normalized;
         }
@@ -720,5 +638,31 @@ public class Agent : MonoBehaviour, CrowdObject {
         // Implementation goes here
         return radius;
     }
+
+
+    // FOV rectangle
+    void OnDrawGizmos()
+    {
+        if (transform == null) return;
+
+        // Define the FOV rectangle's vertices
+        float alpha = transform.eulerAngles.z;
+        float alphaRadians = alpha * Mathf.Deg2Rad;
+        Vector2 myDir = new Vector2(Mathf.Cos(alphaRadians), Mathf.Sin(alphaRadians));
+        Matrix2x2 transf = new Matrix2x2(Mathf.Cos(alphaRadians), -Mathf.Sin(alphaRadians), Mathf.Sin(alphaRadians), Mathf.Cos(alphaRadians));
+
+        Vector2 topLeft = (Vector2)transform.position + transf * new Vector2(0, fieldOfView.visWide / 2);
+        Vector2 topRight = (Vector2)transform.position + transf * new Vector2(fieldOfView.visLong, fieldOfView.visWide / 2);
+        Vector2 bottomLeft = (Vector2)transform.position + transf * new Vector2(0, -fieldOfView.visWide / 2);
+        Vector2 bottomRight = (Vector2)transform.position + transf * new Vector2(fieldOfView.visLong, -fieldOfView.visWide / 2);
+
+        // Draw the FOV rectangle using Gizmos
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(topRight, bottomRight);
+        Gizmos.DrawLine(bottomRight, bottomLeft);
+        Gizmos.DrawLine(bottomLeft, topLeft);
+    }
+
 
 }

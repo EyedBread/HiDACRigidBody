@@ -38,6 +38,8 @@ public class Matrix2x2
 
 public class FieldOfView : MonoBehaviour
 {
+    [SerializeField] public LayerMask agentMask;
+
     // public Rigidbody2D rb;
     private CircleCollider2D agentCollider;
 
@@ -47,7 +49,7 @@ public class FieldOfView : MonoBehaviour
 
     public float myPersonalSpace;
 
-    public bool useNaive = true;
+    public bool useNaive = false;
 
     public float myRadius;
 
@@ -58,7 +60,7 @@ public class FieldOfView : MonoBehaviour
 
     Wall[] allWalls;
 
-    public LayerMask agentMask;
+
     public LayerMask wallMask;
     public LayerMask fallenAgentMask;
     public LayerMask obstacleMask;
@@ -81,7 +83,7 @@ public class FieldOfView : MonoBehaviour
 
     void Start()
     {
-        agentMask = LayerMask.GetMask("Agent");
+        //agentMask = LayerMask.GetMask("Agent");
         wallMask = LayerMask.GetMask("Wall");
         fallenAgentMask = LayerMask.GetMask("FallenAgent");
         obstacleMask = LayerMask.GetMask("Obstacle");
@@ -112,18 +114,25 @@ public class FieldOfView : MonoBehaviour
         collidedAgents.Clear();
         collidedObstacles.Clear();
         collidedWalls.Clear();
-        if (!useNaive) {
-            FindVisibleObjects(agentMask, visibleAgents);
-            FindVisibleObjects(wallMask, visibleWalls);
-            FindVisibleObjects(fallenAgentMask, visibleFallenAgents);
+
+        if (true)
+        {
+            //FindVisibleObjects(agentMask, visibleAgents);
+            //FindVisibleObjects(wallMask, visibleWalls);
+            //FindVisibleObjects(fallenAgentMask, visibleFallenAgents);
+
+            FindVisibleObjects();
+
         }
-        else {
+        else
+        {
+            Debug.Log("Naive!!!!!!!!!!!!!");
             FindPossibleCollidersNaive();
         }
 
     }
 
-    void OnDrawGizmos()
+    /* void OnDrawGizmos()
     {
 
         float alpha = transform.eulerAngles.z;
@@ -148,10 +157,10 @@ public class FieldOfView : MonoBehaviour
 
         // Reset the Gizmos matrix to the previous value
         Gizmos.matrix = oldGizmosMatrix;
-    }
+    }*/
 
 
-//--------------------------------NAIVE FUNCTIONS START------------------------------------
+    //--------------------------------NAIVE FUNCTIONS START------------------------------------
     void FindPossibleCollidersNaive()
     {
         //Update values that may have changed
@@ -163,17 +172,19 @@ public class FieldOfView : MonoBehaviour
         float alphaRadians = alpha * Mathf.Deg2Rad;
         Vector2 myDir = new Vector2(Mathf.Cos(alphaRadians), Mathf.Sin(alphaRadians));
         myDir.Normalize();
-        
 
-        foreach(Agent otheragent in allAgents)
+
+
+        foreach (Agent otheragent in allAgents) // check 
         {
-            if (otheragent == agent) { //SKIP FINDING YOURSELF
+            if (otheragent == agent)
+            { //SKIP FINDING YOURSELF
                 continue;
             }
 
             Vector2 otherPos = otheragent.transform.position;
             float otherRadius = otheragent.radius;
-            
+
             // float distance = (myPos - otherPos).magnitude - otherRadius;
 
             float d = GeometryUtils.PtToLineDist(otherPos, myPos, myDir, visLong);
@@ -181,28 +192,32 @@ public class FieldOfView : MonoBehaviour
             float er = otherRadius + visWide;
             Vector2 meToYou = otherPos - myPos;
             // Debug.Log("MeToYOu: " + meToYou + ", myDir: " + myDir + gameObject.name);
-            if (d <= er && Vector2.Dot(meToYou, myDir) > 0) {
+            if (d <= er && Vector2.Dot(meToYou, myDir) > 0)
+            {
                 visibleAgents.Add(otheragent.transform);
                 // Debug.Log("Found agent");
             }
-                
+
 
             //CHECK FOR COLLISION
             float distance = (myPos - otherPos).magnitude;
 
-            if (distance < myRadius + myPersonalSpace) {
+            if (distance < myRadius + myPersonalSpace)
+            {
                 collidedAgents.Add(otheragent.transform);
             }
         }
 
-        foreach(Wall wall in allWalls)
+        foreach (Wall wall in allWalls)
         {
 
-            if (AgentHasVisionOfWall(myPos, alpha, visLong, visWide, wall.getStart(), wall.getEnd())) {
+            if (AgentHasVisionOfWall(myPos, alpha, visLong, visWide, wall.getStart(), wall.getEnd()))
+            {
                 visibleWalls.Add(wall.transform);
             }
 
-            if (AgentHasCollisionWithWall(myPos, alpha, visLong, visWide, wall.getStart(), wall.getEnd(), transform.localScale.y)) {
+            if (AgentHasCollisionWithWall(myPos, alpha, visLong, visWide, wall.getStart(), wall.getEnd(), transform.localScale.y))
+            {
                 collidedWalls.Add(wall.transform);
             }
         }
@@ -312,38 +327,120 @@ public class FieldOfView : MonoBehaviour
         return Mathf.Abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) / 2);
     }
 
-//---------------------------NAIVE FUNCTIONS END-------------------------------------------------------
+    //---------------------------NAIVE FUNCTIONS END-------------------------------------------------------
+    /*
+        void FindVisibleObjects(LayerMask targetMask, List<Transform> visibleList)
+        {
+            //Direction of agent
+            float alpha = transform.eulerAngles.z; // rotation around the z-axis
+            float alphaRadians = alpha * Mathf.Deg2Rad; // deg to radians
+            Vector2 myDir = new Vector2(Mathf.Cos(alphaRadians), Mathf.Sin(alphaRadians)); // direction vector
 
-    void FindVisibleObjects(LayerMask targetMask, List<Transform> visibleList)
+
+            //used to align direction vector myDir with the agent's field of view.
+            Matrix2x2 transf = new Matrix2x2(Mathf.Cos(alphaRadians),-Mathf.Sin(alphaRadians),Mathf.Sin(alphaRadians),Mathf.Cos(alphaRadians)); 
+
+            Collider2D[] targetsInRange = Physics2D.OverlapBoxAll((Vector2) transform.position + transf*myDir*visLong/2, new Vector2(visWide, visLong), alpha, targetMask);
+
+            Debug.Log("targetsInRange size: " + targetsInRange.Length);
+
+            for (int i = 0; i < targetsInRange.Length; i++)
+            {
+                Transform target = targetsInRange[i].transform;
+
+                // Check if the target is the same as the agent itself, and skip it
+                if (target == transform)
+                {
+                    continue;
+                }
+
+                Vector3 directionToTarget = (target.position - transform.position).normalized; // from agent to target
+
+                if (Mathf.Abs(Vector3.Angle(transform.up, directionToTarget)) <= 90) // In front of the agent
+                {
+                    float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask); //look for blocking obstacles
+
+                    if (hit)
+                    {
+                        Debug.Log("Raycast hit: " + hit.collider.gameObject.name);
+                    }
+
+                    // Draw the ray in the scene view (use Color.red or any other desired color)
+                    Debug.DrawLine(transform.position, transform.position + directionToTarget * distanceToTarget, Color.red, 0.1f);
+
+                    if (!hit)
+                    {
+                        Debug.Log("No Obstacles!!!!!!!!!!!!!!!!!");
+                        visibleList.Add(target);
+                    }
+                }
+            }
+        } */
+
+    void FindVisibleObjects()
     {
-        //Direction of agent
+        //Update values that may have changed
+        myPersonalSpace = agent.getPersonalSpace();
+        visLong = agent.vislong;
+        visWide = agent.viswide;
+
+        // Direction of agent
         float alpha = transform.eulerAngles.z;
         float alphaRadians = alpha * Mathf.Deg2Rad;
         Vector2 myDir = new Vector2(Mathf.Cos(alphaRadians), Mathf.Sin(alphaRadians));
+        myDir.Normalize();
 
-        // Vector2 myDir = agent.getVelocity().normalized;
-        Matrix2x2 transf = new Matrix2x2(Mathf.Cos(alpha),-Mathf.Sin(alpha),Mathf.Sin(alpha),Mathf.Cos(alpha));
-        Collider2D[] targetsInRange = Physics2D.OverlapBoxAll((Vector2) transform.position + transf*myDir*visLong/2, new Vector2(visWide, visLong), alpha, targetMask);
-        // OnDrawGizmos();
-        Debug.Log("targetsInRange size: " + targetsInRange.Length);
+        // Used to align direction vector myDir with the agent's field of view
+        Matrix2x2 transf = new Matrix2x2(Mathf.Cos(alphaRadians), -Mathf.Sin(alphaRadians), Mathf.Sin(alphaRadians), Mathf.Cos(alphaRadians));
+
+        // Find agents in range
+        Collider2D[] agentsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + transf * myDir * visLong / 2, new Vector2(visWide, visLong), alpha, agentMask);
+        CheckVisibleAndCollidedObjects(agentsInRange, visibleAgents, collidedAgents, myPersonalSpace, true);
+
+        // Find walls in range
+        Collider2D[] wallsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + transf * myDir * visLong / 2, new Vector2(visWide, visLong), alpha, wallMask);
+        CheckVisibleAndCollidedObjects(wallsInRange, visibleWalls, collidedWalls, myPersonalSpace, false);
+    }
+
+    void CheckVisibleAndCollidedObjects(Collider2D[] targetsInRange, List<Transform> visibleList, List<Transform> collidedList, float personalSpace, bool isAgent)
+    {
         for (int i = 0; i < targetsInRange.Length; i++)
         {
             Transform target = targetsInRange[i].transform;
+
+            // Check if the target is the same as the agent itself, and skip it
+            if (target == transform)
+            {
+                continue;
+            }
+
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
             if (Mathf.Abs(Vector3.Angle(transform.up, directionToTarget)) <= 90)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask);
+                //RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask);
 
-                // Draw the ray in the scene view (use Color.red or any other desired color)
-                Debug.DrawLine(transform.position, transform.position + directionToTarget * distanceToTarget, Color.red, 0.2f);
+                //visibleAgents.Add(otheragent.transform);
+                visibleList.Add(target);
 
-                if (!hit)
+                //if (!hit)
+                //{
+                //    visibleList.Add(target);
+                //}
+            }
+
+            if (isAgent)
+            {
+                // Check for collision
+                float distance = (transform.position - target.position).magnitude;
+                if (distance < myRadius + personalSpace)
                 {
-                    visibleList.Add(target);
+                    collidedList.Add(target);
                 }
             }
         }
     }
+
 }
