@@ -17,6 +17,9 @@ public class Agent : MonoBehaviour, CrowdObject {
 
     bool isFallen = false;
 
+    //The threshold in which the magnitude of the repulsionforce vector turns the agent into a fallen agent
+    public float repelsionMagThreshold = 10.0f;
+
     private Vector2 prevForce = new Vector2(0, 0);
 
     public float detectionRadius = 5.0f; // The range within which agents will be detected
@@ -53,10 +56,24 @@ public class Agent : MonoBehaviour, CrowdObject {
         gameObject.layer = LayerMask.NameToLayer("FallenAgent");
 
         // Adjust the agent's collider
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        collider.size = new Vector2(1, 0.5f); // Adjust the size as needed
-        collider.offset = new Vector2(0, -0.25f); // Adjust the offset as needed
-        collider.isTrigger = true;
+        CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
+
+        if (circleCollider != null)
+        {
+            float radius = circleCollider.radius;
+            Destroy(circleCollider);
+
+            BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
+
+            boxCollider.size = new Vector2(radius,radius); //TODO : FINETUNE THIS
+            boxCollider.isTrigger = true;
+            //TODO : ADD OFFSET
+        }
+
+        // BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        // collider.size = new Vector2(1, 0.5f); // Adjust the size as needed
+        // collider.offset = new Vector2(0, -0.25f); // Adjust the offset as needed
+        // collider.isTrigger = true;
     }
 
 
@@ -138,6 +155,10 @@ public class Agent : MonoBehaviour, CrowdObject {
     // Update is called once per frame
     void FixedUpdate()
     {
+        //Skip looping
+        if (isFallen)
+            return;
+
         float lambda = 1.0f;
 
         Vector2 repelForceFromAgents = Vector2.zero;
@@ -186,7 +207,6 @@ public class Agent : MonoBehaviour, CrowdObject {
             //TODO : SWITCH ALL THESE COLLIDER LOGIC OUTSIDE OF FOV LOGIC
             if (agentCollisionHandler.collidedObjects.Contains(visibleAgent)) //REPULSION FORCES
             {
-
                 // i is this agent, j is the other agent
                 // d_ji is the distance between their centers
                 // ep is the person
@@ -230,11 +250,11 @@ public class Agent : MonoBehaviour, CrowdObject {
                 // Interact with collided agents
                 Vector2 jtoi = transform.position - collidedAgent.position;
 
-                Vector2 v_j = Vector2.zero; //TODO : NOT NEEDED
+                // Vector2 v_j = Vector2.zero; //TODO : NOT NEEDED
 
 
-                // Access the collided agent's velocity
-                v_j = otherAgent.getVelocity();
+                // // Access the collided agent's velocity
+                // v_j = otherAgent.getVelocity();
                 
 
                 float collidedAgentRadius = collidedAgentCircleCollider.radius;
@@ -322,6 +342,12 @@ public class Agent : MonoBehaviour, CrowdObject {
         // gameObject.transform.position = new Vector3(pos.x, pos.y, 0);
         repelForceFromAgents *= lambda;
         repelForce = repelForceFromAgents + repelForceFromWalls;
+
+        if (repelForce.magnitude > repelsionMagThreshold) {
+            //FALL DOWN AND DIE!
+            Debug.Log("I HAVE FALLEN");
+            isFallen = true;
+        }
 
         if (Vector2.Dot(vel, repelForceFromAgents) < 0 && !panic)
         {
@@ -666,6 +692,10 @@ public class Agent : MonoBehaviour, CrowdObject {
             return true;
 
         return false;
+    }
+
+    public bool fallen() {
+        return isFallen;
     }
 
     public float getDistance(Vector2 pos)

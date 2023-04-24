@@ -91,6 +91,7 @@ public class FieldOfView : MonoBehaviour
         myRadius = agentCollider.radius;
         allWalls = FindObjectsOfType<Wall>();
         myPersonalSpace = agent.getPersonalSpace();
+        
         // StartCoroutine(FindTargetsWithDelay(0.2f));
 
     }
