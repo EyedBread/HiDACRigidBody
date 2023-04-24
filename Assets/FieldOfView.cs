@@ -183,8 +183,14 @@ public class FieldOfView : MonoBehaviour
             Vector2 meToYou = otherPos - myPos;
             // Debug.Log("MeToYOu: " + meToYou + ", myDir: " + myDir + gameObject.name);
             if (d <= er && Vector2.Dot(meToYou, myDir) > 0) {
-                visibleAgents.Add(otheragent.transform);
+                if (!otheragent.fallen())
+                    visibleAgents.Add(otheragent.transform);
                 // Debug.Log("Found agent");
+                else {
+                    // Debug.Log("I see fallen agent!");
+                    visibleFallenAgents.Add(otheragent.transform); //TODO : DOESN'T CHECK FOR THE FALLEN AGENTS BOX BUT RATHER CIRCLE, MAY NEED TO CHANGE LATER
+                }
+                    
             }
                 
 
@@ -192,7 +198,9 @@ public class FieldOfView : MonoBehaviour
             float distance = (myPos - otherPos).magnitude;
 
             if (distance < myRadius + myPersonalSpace) {
-                collidedAgents.Add(otheragent.transform);
+                if (!otheragent.fallen())
+                    collidedAgents.Add(otheragent.transform);
+                //DON'T DO REPULSION FORCES WITH FALLEN AGENTS
             }
         }
 

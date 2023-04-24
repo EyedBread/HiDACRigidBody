@@ -18,7 +18,7 @@ public class Agent : MonoBehaviour, CrowdObject {
     bool isFallen = false;
 
     //The threshold in which the magnitude of the repulsionforce vector turns the agent into a fallen agent
-    public float repelsionMagThreshold = 10.0f;
+    public float repelsionMagThreshold = 5.0f;
 
     private Vector2 prevForce = new Vector2(0, 0);
 
@@ -58,15 +58,18 @@ public class Agent : MonoBehaviour, CrowdObject {
         // Adjust the agent's collider
         CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
 
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+
         if (circleCollider != null)
         {
             float radius = circleCollider.radius;
             Destroy(circleCollider);
+            
 
-            BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
+            // BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
 
-            boxCollider.size = new Vector2(radius,radius); //TODO : FINETUNE THIS
-            boxCollider.isTrigger = true;
+            // boxCollider.size = new Vector2(radius,radius); //TODO : FINETUNE THIS
+            // boxCollider.isTrigger = true;
             //TODO : ADD OFFSET
         }
 
@@ -128,10 +131,11 @@ public class Agent : MonoBehaviour, CrowdObject {
     
         if (Vector2.Dot(myDir, otherDir) >= 0.655f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
         {
-            Debug.Log("meToYou" + meToYou + ", magnitude: " + meToYou.magnitude + ", waitingRadius: " + waitingRadius);
+            // Debug.Log("meToYou" + meToYou + ", magnitude: " + meToYou.magnitude + ", waitingRadius: " + waitingRadius);
             waiting = true;
             waitTime = rand.Next(1,50);
-            Debug.Log("AGENT " + gameObject.name + " IS WAITING");
+            // Debug.Log("AGENT " + gameObject.name + " IS WAITING");
+        
         }
 
         return tforce * distweight * dirweight;
@@ -156,8 +160,11 @@ public class Agent : MonoBehaviour, CrowdObject {
     void FixedUpdate()
     {
         //Skip looping
-        if (isFallen)
+        if (isFallen) {
+            rb.velocity = Vector2.zero;
             return;
+        }
+            
 
         float lambda = 1.0f;
 
@@ -268,7 +275,7 @@ public class Agent : MonoBehaviour, CrowdObject {
         //CASE WALL ----------------------------------------------------------------
         foreach (Transform visibleWall in fieldOfView.visibleWalls)
         {
-            Debug.Log("SEE WALL");
+            // Debug.Log("SEE WALL");
             Vector2 wallNorm = Vector2.zero;
 
             float distance = (visibleWall.position - transform.position).magnitude;
@@ -327,17 +334,18 @@ public class Agent : MonoBehaviour, CrowdObject {
         }
 
         //CASE FALLEN AGENT -------------------------------------------------------
-        // foreach (Transform visibleFallenAgent in fieldOfView.visibleFallenAgents)
-        // {
+        foreach (Transform visibleFallenAgent in fieldOfView.visibleFallenAgents)
+        {
 
-        //     //NOT IMPLEMENTED YET
+            //NOT IMPLEMENTED YET
+            Vector2 d = (transform.position - visibleFallenAgent.transform.position); // obstacle k to agent i?
 
-        //     if (agentCollisionHandler.collidedObjects.Contains(visibleFallenAgent))
-        //     {
-        //         // Interact with visible and collided fallen agents
-        //         // NO REPULSION WITH FALLEN AGENTS
-        //     }
-        // }
+            Vector2 tempForce = GeometryUtils.CrossAndRecross(d, rb.velocity);
+            tempForce.Normalize();
+            tempForce *= fallenWeight;
+            currentForce += tempForce;
+
+        }
 
         // gameObject.transform.position = new Vector3(pos.x, pos.y, 0);
         repelForceFromAgents *= lambda;
@@ -345,8 +353,10 @@ public class Agent : MonoBehaviour, CrowdObject {
 
         if (repelForce.magnitude > repelsionMagThreshold) {
             //FALL DOWN AND DIE!
-            Debug.Log("I HAVE FALLEN");
+            Debug.Log(gameObject.name + " HAS FALLEN");
             isFallen = true;
+            rb.velocity = Vector2.zero;
+            AgentFalls();
         }
 
         if (Vector2.Dot(vel, repelForceFromAgents) < 0 && !panic)
@@ -503,7 +513,7 @@ public class Agent : MonoBehaviour, CrowdObject {
     public float waitingRadius = 1.5f;
 
     // Whether agent is panicked - idea: make quantitative
-    bool panic = false;
+    public bool panic = false;
 
     // Fallen-agent-avoidance parameter
     float Beta = 0.0f;
