@@ -15,7 +15,7 @@ public class Agent : MonoBehaviour {
 
     private FieldOfView fieldOfView;
 
-    bool isFallen = false;
+    public bool isFallen = false;
 
     //The threshold in which the magnitude of the repulsionforce vector turns the agent into a fallen agent
     public float repelsionMagThreshold = 5.0f;
@@ -55,15 +55,18 @@ public class Agent : MonoBehaviour {
         // Change the agent's layer to "FallenAgent"
         gameObject.layer = LayerMask.NameToLayer("FallenAgent");
 
+        Debug.Log(gameObject.name + " HAS FALLEN");
+
         // Adjust the agent's collider
         CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
+        circleCollider.isTrigger = true;
 
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
         if (circleCollider != null)
         {
-            float radius = circleCollider.radius;
-            Destroy(circleCollider);
+            // float radius = circleCollider.radius;
+            // Destroy(circleCollider);
             
 
             // BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
@@ -120,7 +123,7 @@ public class Agent : MonoBehaviour {
         {
             // Debug.Log("RIGHT HAND RULE APPLIED FOR AGENT " + gameObject.name);
             Vector2 rforce = Vector2.Perpendicular(vel); // Tangent to the right
-            tforce += rforce * 0.2f;
+            tforce += rforce * 0.05f;
         }
 
         Vector2 myDir = vel.normalized;
@@ -149,7 +152,10 @@ public class Agent : MonoBehaviour {
         agentCollider = GetComponent<CircleCollider2D>();
         lastPos = transform.position;
         radius = agentCollider.radius;
+        if (isFallen) 
+            AgentFalls();
     }
+
 
     Vector2 lastPos;
 
@@ -186,7 +192,7 @@ public class Agent : MonoBehaviour {
         //CASE AGENT --------------------------------------------------------------
         foreach (Transform visibleAgent in fieldOfView.visibleAgents) 
         {
-            // Debug.Log("I SEE AGENT");
+            // Debug.Log("AGENT " + gameObject.name + " sees " +visibleAgent.name);
             
             Rigidbody2D visibleAgentRigidbody = visibleAgent.GetComponent<Rigidbody2D>();
             CircleCollider2D visibleAgentCircleCollider = visibleAgent.GetComponent<CircleCollider2D>();
@@ -208,35 +214,6 @@ public class Agent : MonoBehaviour {
 
             currentForce += calcAgentForce(visibleAgent) * agentWeight; //NORMAL FORCES
 
-            //TODO : SWITCH ALL THESE COLLIDER LOGIC OUTSIDE OF FOV LOGIC
-            if (agentCollisionHandler.collidedObjects.Contains(visibleAgent)) //REPULSION FORCES
-            {
-                // i is this agent, j is the other agent
-                // d_ji is the distance between their centers
-                // ep is the person
-                // formula for agent: (pos_i - pos_j)*(r_i + ep_i + r_j - d_ji)/ d_ji
-
-                // Interact with visible and collided agents
-                // Vector2 jtoi = transform.position - visibleAgent.position;
-
-                // Vector2 v_j = Vector2.zero; //TODO : NOT NEEDED
-
-                // if (otherAgent != null)
-                // {
-                //     // Access the visible agent's velocity
-                //     v_j = otherAgent.getVelocity();
-                // }
-
-                // if (visibleAgentCircleCollider != null) 
-                // {
-                //     visibleAgentRadius = visibleAgentCircleCollider.radius;
-                // }
-
-                // float k = (agentCollider.radius + personalSpace + jtoi.magnitude - visibleAgentRadius) / (jtoi.magnitude + visibleAgentRadius);
-
-                // repelForceFromAgents += jtoi * k;
-                
-            }
 
         }
         
@@ -254,11 +231,6 @@ public class Agent : MonoBehaviour {
                 // Interact with collided agents
                 Vector2 jtoi = transform.position - collidedAgent.position;
 
-                // Vector2 v_j = Vector2.zero; //TODO : NOT NEEDED
-
-
-                // // Access the collided agent's velocity
-                // v_j = otherAgent.getVelocity();
                 
 
                 float collidedAgentRadius = collidedAgentCircleCollider.radius;
@@ -290,20 +262,6 @@ public class Agent : MonoBehaviour {
             tempForce.Normalize();
             tempForce *= wallWeight;
             currentForce += tempForce;
-
-            // if (agentCollisionHandler.collidedObjects.Contains(visibleWall))
-            // {
-            //     lambda = 0.3f;
-            //     // Interact with visible and collided walls
-            //     float k = (agentCollider.radius + personalSpace - distance) / distance;
-            //     Vector2 currWallRepelForce = wallNorm * k;
-
-            //     if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
-            //     {
-            //         repelForceFromWalls += currWallRepelForce;
-            //     }
-
-            // }
 
             
         }
@@ -340,7 +298,12 @@ public class Agent : MonoBehaviour {
             Vector2 tempForce = GeometryUtils.CrossAndRecross(d, rb.velocity);
             tempForce.Normalize();
             tempForce *= fallenWeight;
+
+            Debug.Log("Force: " + tempForce);
+
             currentForce += tempForce;
+
+            // Debug.Log("HI");
 
         }
 

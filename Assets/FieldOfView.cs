@@ -58,7 +58,7 @@ public class FieldOfView : MonoBehaviour
 
     Wall[] allWalls;
 
-    public LayerMask agentMask;
+    [SerializeField] public LayerMask agentMask;
     public LayerMask wallMask;
     public LayerMask fallenAgentMask;
     public LayerMask obstacleMask;
@@ -81,7 +81,7 @@ public class FieldOfView : MonoBehaviour
 
     void Start()
     {
-        agentMask = LayerMask.GetMask("Agent");
+        // agentMask = LayerMask.GetMask("Agent");
         wallMask = LayerMask.GetMask("Wall");
         fallenAgentMask = LayerMask.GetMask("FallenAgent");
         obstacleMask = LayerMask.GetMask("Obstacle");
@@ -113,42 +113,13 @@ public class FieldOfView : MonoBehaviour
         collidedAgents.Clear();
         collidedObstacles.Clear();
         collidedWalls.Clear();
-        if (!useNaive) {
-            FindVisibleObjects(agentMask, visibleAgents);
-            FindVisibleObjects(wallMask, visibleWalls);
-            FindVisibleObjects(fallenAgentMask, visibleFallenAgents);
+        if (true) {
+            FindVisibleObjects();
         }
         else {
             FindPossibleCollidersNaive();
         }
 
-    }
-
-    void OnDrawGizmos()
-    {
-
-        float alpha = transform.eulerAngles.z;
-        float alphaRadians = alpha * Mathf.Deg2Rad;
-        Vector2 myDir = new Vector2(Mathf.Cos(alphaRadians), Mathf.Sin(alphaRadians));
-        Matrix2x2 transf = new Matrix2x2(Mathf.Cos(alphaRadians),-Mathf.Sin(alphaRadians),Mathf.Sin(alphaRadians),Mathf.Cos(alphaRadians));
-
-        Vector2 boxCenter = (Vector2)transform.position + transf * myDir * visLong / 2;
-        Vector2 boxSize = new Vector2(visLong, visWide);
-
-        // Set the Gizmos color
-        Gizmos.color = Color.green;
-
-        // Save the current Gizmos matrix
-        Matrix4x4 oldGizmosMatrix = Gizmos.matrix;
-
-        // Set the Gizmos matrix with the position, rotation, and scale
-        Gizmos.matrix = Matrix4x4.TRS(boxCenter, Quaternion.Euler(0, 0, alpha), Vector3.one);
-
-        // Draw the wireframe cube
-        Gizmos.DrawWireCube(Vector3.zero, boxSize);
-
-        // Reset the Gizmos matrix to the previous value
-        Gizmos.matrix = oldGizmosMatrix;
     }
 
 
@@ -323,34 +294,102 @@ public class FieldOfView : MonoBehaviour
 
 //---------------------------NAIVE FUNCTIONS END-------------------------------------------------------
 
-    void FindVisibleObjects(LayerMask targetMask, List<Transform> visibleList)
+    void FindVisibleObjects()
     {
-        //Direction of agent
+        //Update values that may have changed
+        myPersonalSpace = agent.getPersonalSpace();
+        visLong = agent.vislong;
+        visWide = agent.viswide;
+
+        // Direction of agent
         float alpha = transform.eulerAngles.z;
         float alphaRadians = alpha * Mathf.Deg2Rad;
         Vector2 myDir = new Vector2(Mathf.Cos(alphaRadians), Mathf.Sin(alphaRadians));
+        myDir.Normalize();
 
-        // Vector2 myDir = agent.getVelocity().normalized;
-        Matrix2x2 transf = new Matrix2x2(Mathf.Cos(alpha),-Mathf.Sin(alpha),Mathf.Sin(alpha),Mathf.Cos(alpha));
-        Collider2D[] targetsInRange = Physics2D.OverlapBoxAll((Vector2) transform.position + transf*myDir*visLong/2, new Vector2(visWide, visLong), alpha, targetMask);
-        // OnDrawGizmos();
-        Debug.Log("targetsInRange size: " + targetsInRange.Length);
+        // Used to align direction vector myDir with the agent's field of view
+
+        // Find agents in range
+        Collider2D[] agentsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, agentMask);
+        CheckVisibleAndCollidedObjects(agentsInRange, visibleAgents, collidedAgents, myPersonalSpace, true);
+
+        //Find fallen agents in range
+        Collider2D[] fallenAgentsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, fallenAgentMask);
+        CheckVisibleAndCollidedObjects(fallenAgentsInRange, visibleFallenAgents, collidedAgents, myPersonalSpace, true);
+
+        DebugDrawBox((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, Color.yellow, 0.01f);
+
+        // Find walls in range
+        Collider2D[] wallsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, wallMask);
+        CheckVisibleAndCollidedObjects(wallsInRange, visibleWalls, collidedWalls, myPersonalSpace, false);
+    }
+
+    void DebugDrawBox( Vector2 point, Vector2 size, float angle, Color color, float duration) {
+
+        var orientation = Quaternion.Euler(0, 0, angle);
+
+        // Basis vectors, half the size in each direction from the center.
+        Vector2 right = orientation * Vector2.right * size.x/2f;
+        Vector2 up = orientation * Vector2.up * size.y/2f;
+
+        // Four box corners.
+        var topLeft = point + up - right;
+        var topRight = point + up + right;
+        var bottomRight = point - up + right;
+        var bottomLeft = point - up - right;
+
+        // Now we've reduced the problem to drawing lines.
+        Debug.DrawLine(topLeft, topRight, color, duration);
+        Debug.DrawLine(topRight, bottomRight, color, duration);
+        Debug.DrawLine(bottomRight, bottomLeft, color, duration);
+        Debug.DrawLine(bottomLeft, topLeft, color, duration);
+    }
+
+    void CheckVisibleAndCollidedObjects(Collider2D[] targetsInRange, List<Transform> visibleList, List<Transform> collidedList, float personalSpace, bool isAgent)
+    {
         for (int i = 0; i < targetsInRange.Length; i++)
         {
+            
             Transform target = targetsInRange[i].transform;
+
+
+
+            // Check if the target is the same as the agent itself, and skip it
+            if (target == transform)
+            {
+                continue;
+            }
+
+
+
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
             if (Mathf.Abs(Vector3.Angle(transform.up, directionToTarget)) <= 90)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask);
+                //RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask);
 
-                // Draw the ray in the scene view (use Color.red or any other desired color)
-                Debug.DrawLine(transform.position, transform.position + directionToTarget * distanceToTarget, Color.red, 0.2f);
+                Debug.Log(gameObject.name + " Sees " + target.name);
 
-                if (!hit)
+                //visibleAgents.Add(otheragent.transform);
+                visibleList.Add(target);
+
+                //if (!hit)
+                //{
+                //    visibleList.Add(target);
+                //}
+            }
+
+            // visibleList.Add(target);
+
+            if (isAgent)
+            {
+                Agent agent = target.GetComponent<Agent>();
+                // Check for collision
+                float distance = (transform.position - target.position).magnitude;
+                if (distance < myRadius + personalSpace && !agent.fallen())
                 {
-                    visibleList.Add(target);
+                    collidedList.Add(target);
                 }
             }
         }
