@@ -8,7 +8,7 @@ using System;
 
 
 
-public class Agent : MonoBehaviour, CrowdObject {
+public class Agent : MonoBehaviour {
 
 
     public const float epsilon = 0.05f;
@@ -78,9 +78,6 @@ public class Agent : MonoBehaviour, CrowdObject {
         // collider.offset = new Vector2(0, -0.25f); // Adjust the offset as needed
         // collider.isTrigger = true;
     }
-
-
-
 
         // Follows equation 6, 7, 8, 9
     Vector2 calcAgentForce(Transform visibleAgent)
@@ -473,7 +470,6 @@ public class Agent : MonoBehaviour, CrowdObject {
     // Weights - avoidance weights
     public float attractorWeight = 1;
     public float wallWeight = 1;
-    public float obstacleWeight = 1;
     public float agentWeight = 1;
 
     public float fallenWeight = 1;
@@ -523,10 +519,6 @@ public class Agent : MonoBehaviour, CrowdObject {
     // Velocity
     Vector2 vel;
 
-    // Norm and its setter method are inherited from CrowdObject
-    // Need to copy something into norm
-    Vector2 force;
-
     // This is needed for repulsion forces. Until those are implemented it will be set to <0.0, 0.0> in calculateForces
     Vector2 repelForce;
 
@@ -562,158 +554,18 @@ public class Agent : MonoBehaviour, CrowdObject {
             return 1.0f;
     }
 
-    //TODO : DOES NOTHING ATM
-    void computeFallen(Vector2 ret) {
-        // Implementation goes here
-    }
-
-    // public Agent() {
-    //     // Implementation goes here
-    //     //TODO
-    // }
-
-
-    // ~Agent() {
-    //     // Cleanup code goes here
-    // }
-
-
-    // public void print() {
-    //     // Implementation goes here, TODO : CONVERT POS TO UNITY POS
-        
-    //     gameObject.transform.position = new Vector3(pos.x, pos.y, 0);
-    //     // Debug.Log("UPDATED");
-    // }
-
-
-
-    void setVelocity(Vector2 set) {
-        // Implementation goes here
-        vel = set;
-    }
-
-    float getSpeed() {
-        // Implementation goes here
-        return 0.0f;
-    }
-
-
     public float getPersonalSpace() {
         // Implementation goes here
         return personalSpace;
     }
 
 
-    void setPos(Vector2 set) {
-        // Implementation goes here
-        pos = set;
-    }
-
-
-
-    public void applyForces(float deltaT)
-    {
-        Vector2 oldPos = pos;
-
-        Vector2 fallen = Vector2.zero;//ComputeFallen(); TODO FIX
-        Vector2 normalMove, movement;
-        float ve = computeVel(deltaT);
-        float moveFactor = computeAlpha() * ve * deltaT;
-        // Debug.Log("moveFactor: " + moveFactor + ", Alpha: " + computeAlpha() + ", vel: " + ve + ", deltaT: " + deltaT);
-        normalMove = force * (1.0f - Beta);
-        fallen = fallen * Beta;
-        movement = fallen + normalMove;
-
-        movement = movement * moveFactor;
-
-        movement = movement + repelForce;
-        force = movement;
-        pos = pos + movement;
-
-        vel = pos - oldPos;
-        norm = vel.normalized;
-    }
-
-    // // Functions to update visibility and collision vectors
-    // public void checkCollide(CrowdObject c) {
-    //     // Implementation goes here
-        
-    //     if ( getDistance( c.getPos() ) < radius + personalSpace) //TODO : CHANGE FROM RADIUS TO PERSONALSPACE? FOR PROPER COLLISIONS? OR EACH AGENTS GETS DIFFERENT RADIUS?
-    //     {
-    //         Debug.Log("COLLISION FOR " + gameObject.name);
-    //         collideObjects.Add(c);
-    //         isColliding = true;
-    //     }
-    // }
-
-    // public void checkVisible(CrowdObject c) {
-    //     // Implementation goes here
-    //     Vector2 norm = getNorm();
-
-    //     Vector2 ep = getPos() + getNorm() * getRadius();
-
-    //     if (c.isVisible(ep, norm, vislong - radius, viswide))
-    //     {
-    //         visObjects.Add(c);
-    //     }
-    // }
-
     // Function to 'reset' at the end of a simulation step 
-    public void reset()
-    {
-        // isColliding = false;
-        stoptime--;
-        if (stoptime == 0)
-        {
-            stopping = false;
-        }
-
-        waitTime--;
-
-        waiting = false;
-
-        vislong = 3.0f;
-        rightHandAngleMultiplier = 1.0f;
-
-        // visObjects.Clear();
-        // collideObjects.Clear();
-        num_agents_ahead = 0;
-        repelForce = Vector2.zero;
-    }
-
-
-    //CROWDOBJECT METHODS
-    // Tells another agent whether it is visible
-    // These are inherited from CrowdObject.h
-    public bool isVisible(Vector2 objPos, Vector2 objDir, float visLength, float visWidth)
-    {
-        // Implementation goes here
-        // Procedure: given the circle that the agent has, find the point closest to the
-        // line described by origin: pos, direction: dir, length: visLength.
-
-        // Procedure: take the point at the center of the circle representing an agent
-        // check that the distance between it and the line is less than radius + visWidth
-
-        // Compute effective pos /radius/ along the normal line (to avoid looking behind oneself
-        float d = GeometryUtils.PtToLineDist(getPos(), objPos, objDir, visLength);
-        
-        float er = getRadius() + visWidth;
-        if (d <= er)
-            return true;
-
-        return false;
-    }
 
     public bool fallen() {
         return isFallen;
     }
 
-    public float getDistance(Vector2 pos)
-    {
-        // Implementation goes here
-        Vector2 result = pos - getPos();
-        return result.magnitude;
-    }
 
     public Vector2 getDirection(Vector2 pos)
     {
@@ -721,32 +573,10 @@ public class Agent : MonoBehaviour, CrowdObject {
         return pos - (Vector2)transform.position;
     }
 
-    public Vector2 getDirection()
-    {
-        if (getSpeed() >= 0.0f + epsilon) 
-        {
-            norm = vel.normalized;
-        }
-
-        return norm;
-    }
-
-    public ObjType getType()
-    {
-        return _myType;
-    }
-
     public Vector2 getPos()
     {
         // Implementation goes here
         return _pos;
-    }
-
-    // get the normalized direction vector of the agent
-    public Vector2 getNorm()
-    {
-        // Implementation goes here
-        return _norm;
     }
 
     public Vector2 getVelocity()

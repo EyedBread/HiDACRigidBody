@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Wall : MonoBehaviour, CrowdObject
+public class Wall : MonoBehaviour
 {
 
     public Vector2 wallNormal;
