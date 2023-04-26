@@ -91,19 +91,8 @@ public class FieldOfView : MonoBehaviour
         myRadius = agentCollider.radius;
         allWalls = FindObjectsOfType<Wall>();
         myPersonalSpace = agent.getPersonalSpace();
-        
-        // StartCoroutine(FindTargetsWithDelay(0.2f));
 
     }
-
-    // IEnumerator FindTargetsWithDelay(float delay)
-    // {
-    //     while (true)
-    //     {
-    //         yield return new WaitForSeconds(delay);
-    //         FindVisibleTargets();
-    //     }
-    // }
 
     public void FindVisibleTargets()
     {
@@ -321,6 +310,9 @@ public class FieldOfView : MonoBehaviour
 
         // Find walls in range
         Collider2D[] wallsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, wallMask);
+        if (wallsInRange.Length > 0) {
+            Debug.Log(gameObject.name + "Sees WALL");
+        }
         CheckVisibleAndCollidedObjects(wallsInRange, visibleWalls, collidedWalls, myPersonalSpace, false);
     }
 
@@ -352,15 +344,11 @@ public class FieldOfView : MonoBehaviour
             
             Transform target = targetsInRange[i].transform;
 
-
-
             // Check if the target is the same as the agent itself, and skip it
             if (target == transform)
             {
                 continue;
             }
-
-
 
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
@@ -368,20 +356,15 @@ public class FieldOfView : MonoBehaviour
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
                 //RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask);
-
                 Debug.Log(gameObject.name + " Sees " + target.name);
-
                 //visibleAgents.Add(otheragent.transform);
                 visibleList.Add(target);
-
                 //if (!hit)
                 //{
                 //    visibleList.Add(target);
                 //}
             }
-
             // visibleList.Add(target);
-
             if (isAgent)
             {
                 Agent agent = target.GetComponent<Agent>();

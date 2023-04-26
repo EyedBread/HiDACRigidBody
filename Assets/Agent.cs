@@ -9,8 +9,6 @@ using System;
 
 
 public class Agent : MonoBehaviour {
-
-
     public const float epsilon = 0.05f;
 
     private FieldOfView fieldOfView;
@@ -65,21 +63,9 @@ public class Agent : MonoBehaviour {
 
         if (circleCollider != null)
         {
-            // float radius = circleCollider.radius;
-            // Destroy(circleCollider);
-            
 
-            // BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
-
-            // boxCollider.size = new Vector2(radius,radius); //TODO : FINETUNE THIS
-            // boxCollider.isTrigger = true;
-            //TODO : ADD OFFSET
         }
 
-        // BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        // collider.size = new Vector2(1, 0.5f); // Adjust the size as needed
-        // collider.offset = new Vector2(0, -0.25f); // Adjust the offset as needed
-        // collider.isTrigger = true;
     }
 
         // Follows equation 6, 7, 8, 9
@@ -90,7 +76,6 @@ public class Agent : MonoBehaviour {
         Rigidbody2D visibleAgentRigidbody = visibleAgent.GetComponent<Rigidbody2D>();
         Agent otherAgent = visibleAgent.GetComponent<Agent>();
             // Access the visible agent's velocity
-            // otherVel = visibleAgentRigidbody.velocity;
         Vector2 otherVel = otherAgent.getVelocity();
 
         //Other Agent Avoidance: Overtaking and bi-directional flow
@@ -107,14 +92,10 @@ public class Agent : MonoBehaviour {
         distweight = Mathf.Pow(meToYou.magnitude - vislong, 2);
 
         if (Vector2.Dot(vel, otherVel) > 0)
-        {
             dirweight = 1.2f;
-        }
         else
-        {
             dirweight = 2.4f;
-        }
-
+        
         // Debug.Log( "Dotproduct between the 2 velocities: " + Mathf.Abs(Vector2.Dot(vel, otherVel)) + " with vels " + vel + " and " + otherVel);
         if (Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized) - 1) <= epsilon * rightHandAngleMultiplier || 
             Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized) + 1) <= epsilon * rightHandAngleMultiplier ||
@@ -131,16 +112,11 @@ public class Agent : MonoBehaviour {
     
         if (Vector2.Dot(myDir, otherDir) >= 0.655f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
         {
-            // Debug.Log("meToYou" + meToYou + ", magnitude: " + meToYou.magnitude + ", waitingRadius: " + waitingRadius);
             waiting = true;
             waitTime = rand.Next(1,50);
-            // Debug.Log("AGENT " + gameObject.name + " IS WAITING");
-        
         }
-
         return tforce * distweight * dirweight;
     }
-
 
     void Start()
     {
@@ -156,7 +132,6 @@ public class Agent : MonoBehaviour {
             AgentFalls();
     }
 
-
     Vector2 lastPos;
 
     // Update is called once per frame
@@ -168,7 +143,6 @@ public class Agent : MonoBehaviour {
             return;
         }
             
-
         float lambda = 1.0f;
 
         Vector2 repelForceFromAgents = Vector2.zero;
@@ -182,18 +156,11 @@ public class Agent : MonoBehaviour {
 
         currentForce += forceAttractor;
 
-        // Debug.Log("Current force: " + currentForce);
-
-        // vel = rb.velocity;
-
-        // Debug.Log("Current vel: " + vel);
-
         fieldOfView.FindVisibleTargets();
         //CASE AGENT --------------------------------------------------------------
         foreach (Transform visibleAgent in fieldOfView.visibleAgents) 
         {
-            // Debug.Log("AGENT " + gameObject.name + " sees " +visibleAgent.name);
-            
+
             Rigidbody2D visibleAgentRigidbody = visibleAgent.GetComponent<Rigidbody2D>();
             CircleCollider2D visibleAgentCircleCollider = visibleAgent.GetComponent<CircleCollider2D>();
             float visibleAgentRadius = visibleAgentCircleCollider.radius;
@@ -204,17 +171,11 @@ public class Agent : MonoBehaviour {
 
             float distance = Vector3.Distance(transform.position, visibleAgent.position);
 
-            
             if (distance < R && Vector2.Dot(direction, vel) > 0) //A semi circle
             {
                 num_agents_ahead++;
             }
-
-
-
             currentForce += calcAgentForce(visibleAgent) * agentWeight; //NORMAL FORCES
-
-
         }
         
         //Repulsion forces with other agents!!!
@@ -231,11 +192,8 @@ public class Agent : MonoBehaviour {
                 // Interact with collided agents
                 Vector2 jtoi = transform.position - collidedAgent.position;
 
-                
-
                 float collidedAgentRadius = collidedAgentCircleCollider.radius;
                 
-
                 float k = (agentCollider.radius + personalSpace + collidedAgentRadius - jtoi.magnitude) / (jtoi.magnitude);
 
                 repelForceFromAgents += jtoi * k;
@@ -262,8 +220,6 @@ public class Agent : MonoBehaviour {
             tempForce.Normalize();
             tempForce *= wallWeight;
             currentForce += tempForce;
-
-            
         }
 
         //Repulsion forces with other walls
@@ -292,7 +248,6 @@ public class Agent : MonoBehaviour {
         foreach (Transform visibleFallenAgent in fieldOfView.visibleFallenAgents)
         {
 
-            //NOT IMPLEMENTED YET
             Vector2 d = (transform.position - visibleFallenAgent.transform.position); // obstacle k to agent i?
 
             Vector2 tempForce = GeometryUtils.CrossAndRecross(d, rb.velocity);
@@ -302,9 +257,6 @@ public class Agent : MonoBehaviour {
             Debug.Log("Force: " + tempForce);
 
             currentForce += tempForce;
-
-            // Debug.Log("HI");
-
         }
 
         // gameObject.transform.position = new Vector3(pos.x, pos.y, 0);
@@ -328,40 +280,22 @@ public class Agent : MonoBehaviour {
         }
 
         if (waiting)
-        {
             vel = Vector2.zero;
-        }
 
         //CurrentForce is already filled up
-
-        
 
         currentForce.Normalize(); //Normalize force vector
 
         prevForce = currentForce;
 
-        // Debug.Log("Normalized force vec: " + currentForce);
-
-
-
-
         //TIME TO APPLY FORCES
-        // if (vel != Vector2.zero) { 
-
-        // }        
         float alpha = computeAlpha();
-        // Debug.Log("Alpha: " + alpha);
         Beta = 0; //For now when no fallen agents
-
-
         Vector2 fallenAgentVec = Vector2.zero;
         float velMagnitude = computeVel(Time.fixedDeltaTime);
-        // velMagnitude = 2.5f;
-        // Debug.Log("velMagnitude: " + velMagnitude);
         float moveFactor = alpha*velMagnitude;
         Vector2 move = moveFactor * ((1 - Beta)*currentForce + Beta*fallenAgentVec);
         // Vector2 desiredPosition = move + repelForce;
-        // Debug.Log("AGENT " + gameObject.name + " IS MOVING TO " + ((Vector2) (transform.position) + (move ) + repelForce) + " FROM " + (Vector2) (transform.position));
 
         // Vector2 lastPos = transform.position;
         rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime + 0.1f*repelForce);
@@ -372,13 +306,8 @@ public class Agent : MonoBehaviour {
         float angleInDegrees = angleInRadians * Mathf.Rad2Deg;
         rb.MoveRotation(angleInDegrees); //TODO : Why doesn't this work????
         transform.rotation = Quaternion.Euler(0, 0, angleInDegrees);
-        // Debug.Log("angle " + rb.rotation);
-        // Debug.Log("Pos: " + transform.position + ", last pos: " + lastPos + ", deltaT: " + Time.fixedDeltaTime); 
         lastPos = transform.position;
-        
         rb.velocity = vel; 
-
-        
 
         //RESET
         stoptime--;
@@ -395,10 +324,7 @@ public class Agent : MonoBehaviour {
         rightHandAngleMultiplier = 1.0f;
         num_agents_ahead = 0;
         repelForce = Vector2.zero;
-        // visObjects.Clear();
-        // collideObjects.Clear();
     }
-
 
     // Radius of the agent's influence semicircle for density calculation, set to 2.0 for now
     public float R = 2.0f;
@@ -406,28 +332,11 @@ public class Agent : MonoBehaviour {
     //Seed generator
     private static System.Random rand = new System.Random();
 
-
-
-
     // // Position - will assume continuous for now
     private Vector2 _pos;
     public Vector2 pos {
         get => _pos;
         set => _pos = value;
-    }
-
-    private Vector2 _norm;
-    public Vector2 norm
-    {
-        get => _norm;
-        set => _norm = value;
-    }
-
-    private ObjType _myType;
-    public ObjType myType
-    {
-        get => _myType;
-        set => _myType = value;
     }
 
     // Weights - avoidance weights
@@ -454,14 +363,6 @@ public class Agent : MonoBehaviour {
 
     int num_agents_ahead = 0;
 
-    // States whether an agent is colliding with another
-    // bool isColliding = false;
-    // List<CrowdObject> collideObjects = new List<CrowdObject>();
-
-    // // Lists of visible objects
-    // // Should probably be pointers, will change when needed 
-    // List<CrowdObject> visObjects = new List<CrowdObject>();
-
     // Whether agent is stopping or waiting
     bool stopping = false;
     int stoptime = 0;
@@ -476,8 +377,6 @@ public class Agent : MonoBehaviour {
 
     // Fallen-agent-avoidance parameter
     float Beta = 0.0f;
-
-
 
     // Velocity
     Vector2 vel;
@@ -529,29 +428,15 @@ public class Agent : MonoBehaviour {
         return isFallen;
     }
 
-
     public Vector2 getDirection(Vector2 pos)
     {
-        // Implementation goes here
         return pos - (Vector2)transform.position;
     }
 
-    public Vector2 getPos()
-    {
-        // Implementation goes here
-        return _pos;
-    }
 
     public Vector2 getVelocity()
     {
         // Implementation goes here
         return vel;
     }
-
-    public float getRadius()
-    {
-        // Implementation goes here
-        return radius;
-    }
-
 }
