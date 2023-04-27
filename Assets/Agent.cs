@@ -80,6 +80,7 @@ public class Agent : MonoBehaviour {
 
         //Other Agent Avoidance: Overtaking and bi-directional flow
         //that agent is walking in the opposite direction and with distance smaller than vislong-1.5
+        Debug.Log( "Dotproduct between the 2 velocities: " + Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized)) + " with vels " + vel.normalized + " and " + otherVel.normalized);
         if (Vector2.Dot(otherVel.normalized, vel.normalized) > 0.8 && meToYou.magnitude > vislong - 1.5 ) {
             return Vector2.zero;
         }
@@ -96,13 +97,13 @@ public class Agent : MonoBehaviour {
         else
             dirweight = 2.4f;
         
-        // Debug.Log( "Dotproduct between the 2 velocities: " + Mathf.Abs(Vector2.Dot(vel, otherVel)) + " with vels " + vel + " and " + otherVel);
+        
         if (Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized) - 1) <= epsilon * rightHandAngleMultiplier || 
             Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized) + 1) <= epsilon * rightHandAngleMultiplier ||
             Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) - 1) <= epsilon * rightHandAngleMultiplier  ||
             Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) + 1) <= epsilon * rightHandAngleMultiplier)
         {
-            // Debug.Log("RIGHT HAND RULE APPLIED FOR AGENT " + gameObject.name);
+            Debug.Log("RIGHT HAND RULE APPLIED FOR AGENT " + gameObject.name);
             Vector2 rforce = Vector2.Perpendicular(vel); // Tangent to the right
             tforce += rforce * 0.05f;
         }
@@ -152,12 +153,28 @@ public class Agent : MonoBehaviour {
 
         Vector2 currentRepelForce = Vector2.zero;
 
-        Vector2 forceAttractor = getDirection(attractor) * attractorWeight;
+
+        Vector2 attract = attractor - (Vector2) transform.position;
+        float dist = attract.magnitude;
+
+        if (dist > 0) 
+            attract.Normalize();
+
+        if (dist < 1.5)
+            attractorWeight = 35;
+        else
+            attractorWeight = 10;
+
+        Vector2 forceAttractor = attract * attractorWeight;
 
         currentForce += forceAttractor;
 
         fieldOfView.FindVisibleTargets();
         //CASE AGENT --------------------------------------------------------------
+        if (panic)
+            agentWeight = 10;
+        else
+            agentWeight = 4;
         foreach (Transform visibleAgent in fieldOfView.visibleAgents) 
         {
 
@@ -200,6 +217,7 @@ public class Agent : MonoBehaviour {
         }
 
         //CASE WALL ----------------------------------------------------------------
+        wallWeight = 25;
         foreach (Transform visibleWall in fieldOfView.visibleWalls)
         {
             // Debug.Log("SEE WALL");

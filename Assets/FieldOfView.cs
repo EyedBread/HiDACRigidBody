@@ -352,19 +352,19 @@ public class FieldOfView : MonoBehaviour
 
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-            if (Mathf.Abs(Vector3.Angle(transform.up, directionToTarget)) <= 90)
-            {
-                float distanceToTarget = Vector3.Distance(transform.position, target.position);
-                //RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask);
-                Debug.Log(gameObject.name + " Sees " + target.name);
-                //visibleAgents.Add(otheragent.transform);
-                visibleList.Add(target);
-                //if (!hit)
-                //{
-                //    visibleList.Add(target);
-                //}
-            }
-            // visibleList.Add(target);
+            // if (Mathf.Abs(Vector3.Angle(transform.up, directionToTarget)) <= 90)
+            // {
+            //     float distanceToTarget = Vector3.Distance(transform.position, target.position);
+            //     //RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask);
+            //     Debug.Log(gameObject.name + " Sees " + target.name);
+            //     //visibleAgents.Add(otheragent.transform);
+            //     visibleList.Add(target);
+            //     //if (!hit)
+            //     //{
+            //     //    visibleList.Add(target);
+            //     //}
+            // }
+            visibleList.Add(target);
             if (isAgent)
             {
                 Agent agent = target.GetComponent<Agent>();
