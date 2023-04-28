@@ -81,7 +81,7 @@ public class Agent : MonoBehaviour {
 
         //Other Agent Avoidance: Overtaking and bi-directional flow
         //that agent is walking in the opposite direction and with distance smaller than vislong-1.5
-        Debug.Log( "Dotproduct between the 2 velocities: " + Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized)) + " with vels " + vel.normalized + " and " + otherVel.normalized);
+        // Debug.Log( "Dotproduct between the 2 velocities: " + Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized)) + " with vels " + vel.normalized + " and " + otherVel.normalized);
         if (Vector2.Dot(otherVel.normalized, vel.normalized) > 0.8 && meToYou.magnitude > vislong - 1.5 ) {
             return Vector2.zero;
         }
@@ -104,7 +104,7 @@ public class Agent : MonoBehaviour {
             Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) - 1) <= epsilon * rightHandAngleMultiplier  ||
             Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) + 1) <= epsilon * rightHandAngleMultiplier)
         {
-            Debug.Log("RIGHT HAND RULE APPLIED FOR AGENT " + gameObject.name);
+            // Debug.Log("RIGHT HAND RULE APPLIED FOR AGENT " + gameObject.name);
             Vector2 rforce = Vector2.Perpendicular(vel); // Tangent to the right
             tforce += rforce * 0.01f;
         }
@@ -308,7 +308,7 @@ public class Agent : MonoBehaviour {
             tempForce.Normalize();
             tempForce *= fallenWeight;
 
-            Debug.Log("Force: " + tempForce);
+            // Debug.Log("Force: " + tempForce);
 
             fallenAgentVec += tempForce;
         }
@@ -327,7 +327,7 @@ public class Agent : MonoBehaviour {
 
         if (Vector2.Dot(vel, repelForceFromAgents) < 0 && !panic)
         {
-            Debug.Log("STOPPING");
+            // Debug.Log("STOPPING");
             stopping = true;
             stoptime = rand.Next(1,150);
             vel = Vector2.zero;
