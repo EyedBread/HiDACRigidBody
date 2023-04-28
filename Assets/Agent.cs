@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -105,7 +106,7 @@ public class Agent : MonoBehaviour {
         {
             Debug.Log("RIGHT HAND RULE APPLIED FOR AGENT " + gameObject.name);
             Vector2 rforce = Vector2.Perpendicular(vel); // Tangent to the right
-            tforce += rforce * 0.05f;
+            tforce += rforce * 0.01f;
         }
 
         Vector2 myDir = vel.normalized;
@@ -121,6 +122,7 @@ public class Agent : MonoBehaviour {
 
     void Start()
     {
+
         pos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         // Debug.Log("Position: " + pos);
         rb = this.GetComponent<Rigidbody2D>();
@@ -175,6 +177,19 @@ public class Agent : MonoBehaviour {
             agentWeight = 10;
         else
             agentWeight = 4;
+        
+        num_agents_ahead = fieldOfView.visibleAgents.Count;
+        //but when the crowd is very dense, then the right preference is not so obvious and several bidirectional flows can emerge (Di/=2). 
+        // Modifying the length of the collision avoidance rectangle and reducing the angle for right preference based on perceived density achieves this behavior. 
+        if (num_agents_ahead > 8 ) {
+            vislong = 4;
+            rightHandAngleMultiplier = 0.1f;
+        }
+        else {
+            vislong = 8;
+            rightHandAngleMultiplier = 1.0f;
+        }
+
         foreach (Transform visibleAgent in fieldOfView.visibleAgents) 
         {
 
@@ -188,13 +203,13 @@ public class Agent : MonoBehaviour {
 
             float distance = Vector3.Distance(transform.position, visibleAgent.position);
 
-            if (distance < R && Vector2.Dot(direction, vel) > 0) //A semi circle
-            {
-                num_agents_ahead++;
-            }
+            // if (Vector2.Dot(direction, vel) > 0) //A semi circle // if (distance < R && 
+            // {
+            //     num_agents_ahead++;
+            // }
             currentForce += calcAgentForce(visibleAgent) * agentWeight; //NORMAL FORCES
         }
-        
+
         //Repulsion forces with other agents!!!
         foreach(Transform collidedAgent in fieldOfView.collidedAgents)
         {
@@ -444,6 +459,10 @@ public class Agent : MonoBehaviour {
 
     public bool fallen() {
         return isFallen;
+    }
+
+    public bool isPanicked() {
+        return panic;
     }
 
     public Vector2 getDirection(Vector2 pos)
