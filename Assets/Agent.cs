@@ -217,7 +217,7 @@ public class Agent : MonoBehaviour {
         }
 
         //CASE WALL ----------------------------------------------------------------
-        wallWeight = 25;
+        wallWeight = 1;
         foreach (Transform visibleWall in fieldOfView.visibleWalls)
         {
             // Debug.Log("SEE WALL");

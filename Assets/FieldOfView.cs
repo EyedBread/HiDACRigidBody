@@ -84,7 +84,7 @@ public class FieldOfView : MonoBehaviour
         // agentMask = LayerMask.GetMask("Agent");
         wallMask = LayerMask.GetMask("Wall");
         fallenAgentMask = LayerMask.GetMask("FallenAgent");
-        obstacleMask = LayerMask.GetMask("Obstacle");
+        obstacleMask = LayerMask.GetMask("Obstacle") | LayerMask.GetMask("Wall");
         allAgents = FindObjectsOfType<Agent>();
         agent = GetComponent<Agent>();
         agentCollider = GetComponent<CircleCollider2D>();
@@ -341,7 +341,7 @@ public class FieldOfView : MonoBehaviour
     {
         for (int i = 0; i < targetsInRange.Length; i++)
         {
-            
+
             Transform target = targetsInRange[i].transform;
 
             // Check if the target is the same as the agent itself, and skip it
@@ -352,26 +352,47 @@ public class FieldOfView : MonoBehaviour
 
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-            // if (Mathf.Abs(Vector3.Angle(transform.up, directionToTarget)) <= 90)
-            // {
-            //     float distanceToTarget = Vector3.Distance(transform.position, target.position);
-            //     //RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask);
-            //     Debug.Log(gameObject.name + " Sees " + target.name);
-            //     //visibleAgents.Add(otheragent.transform);
-            //     visibleList.Add(target);
-            //     //if (!hit)
-            //     //{
-            //     //    visibleList.Add(target);
-            //     //}
-            // }
-            visibleList.Add(target);
+            float distanceToTarget = Vector3.Distance(transform.position, target.position);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask);
+
+            if (!hit || hit.collider.transform == target)
+            {
+                Debug.Log(gameObject.name + " Sees " + target.name);
+                visibleList.Add(target);
+            }
+
             if (isAgent)
             {
                 Agent agent = target.GetComponent<Agent>();
                 // Check for collision
-                float distance = (transform.position - target.position).magnitude;
-                if (distance < myRadius + personalSpace && !agent.fallen())
+                //float distance = (transform.position - target.position).magnitude;
+                if (distanceToTarget < myRadius + personalSpace && !agent.fallen())
                 {
+                    collidedList.Add(target);
+                }
+            }
+            else
+            {
+                // Check for collision with wall
+                //float distanceToTarget1 = Vector3.Distance(transform.position, target.position);
+                //float distance = (transform.position - target.position).magnitude;
+
+                //BoxCollider2D wallCollider = target.GetComponent<BoxCollider2D>();
+                //Vector2 worldSize = target.TransformVector(wallCollider.size);
+                //Debug.Log(worldSize);
+                //float wallThickness = Mathf.Min(Mathf.Abs(worldSize.x), Mathf.Abs(worldSize.y));
+
+                BoxCollider2D wallCollider = target.GetComponent<BoxCollider2D>();
+                float wallThickness = wallCollider.size.y;
+                //Debug.Log(wallThickness);
+
+                //bool colliderContainsTransform = wallCollider.bounds.Contains(transform.position);
+                //Debug.Log(colliderContainsTransform);
+
+                RaycastHit2D hit1 = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, wallMask);
+                if (hit1.collider != null && hit1.collider.transform == target && distanceToTarget < myRadius + wallThickness / 2)
+                {
+                    Debug.Log(gameObject.name + " collided with " + target.name);
                     collidedList.Add(target);
                 }
             }
