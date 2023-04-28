@@ -137,6 +137,9 @@ public class Agent : MonoBehaviour {
 
     Vector2 lastPos;
 
+    //For every iteration, decrement by 1. Int is always 0 or positive. For each panicked agent in vision or high crowd ahead, increment by 1
+    int panicMeter = 0;
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -183,10 +186,13 @@ public class Agent : MonoBehaviour {
         // Modifying the length of the collision avoidance rectangle and reducing the angle for right preference based on perceived density achieves this behavior. 
         if (num_agents_ahead > 8 ) {
             vislong = 4;
+            fieldOfView.visLong = 4;
             rightHandAngleMultiplier = 0.1f;
+            panicMeter++; //
         }
         else {
             vislong = 8;
+            fieldOfView.visLong = 8;
             rightHandAngleMultiplier = 1.0f;
         }
 
@@ -198,6 +204,10 @@ public class Agent : MonoBehaviour {
             float visibleAgentRadius = visibleAgentCircleCollider.radius;
 
             Agent otherAgent = visibleAgent.GetComponent<Agent>();
+
+            if (otherAgent.isPanicked()) {
+                panicMeter++;
+            }
 
             Vector3 direction = visibleAgent.position - transform.position;
 
@@ -278,10 +288,21 @@ public class Agent : MonoBehaviour {
         }
 
         //CASE FALLEN AGENT -------------------------------------------------------
+        if ((fieldOfView.visibleFallenAgents.Count > 4 || panicMeter > 10) && !panic) {
+            //IDK, become panicked when you see 4 or more fallen agents simultaneously
+            // And when panicMeter
+            becomePanicked();
+        }
+
+        Vector2 fallenAgentVec = Vector2.zero;
         foreach (Transform visibleFallenAgent in fieldOfView.visibleFallenAgents)
         {
 
             Vector2 d = (transform.position - visibleFallenAgent.transform.position); // obstacle k to agent i?
+
+            if (d.magnitude < 3) {
+                Beta = 0.5f;
+            }
 
             Vector2 tempForce = GeometryUtils.CrossAndRecross(d, rb.velocity);
             tempForce.Normalize();
@@ -289,7 +310,7 @@ public class Agent : MonoBehaviour {
 
             Debug.Log("Force: " + tempForce);
 
-            currentForce += tempForce;
+            fallenAgentVec += tempForce;
         }
 
         // gameObject.transform.position = new Vector3(pos.x, pos.y, 0);
@@ -323,8 +344,7 @@ public class Agent : MonoBehaviour {
 
         //TIME TO APPLY FORCES
         float alpha = computeAlpha();
-        Beta = 0; //For now when no fallen agents
-        Vector2 fallenAgentVec = Vector2.zero;
+        
         float velMagnitude = computeVel(Time.fixedDeltaTime);
         float moveFactor = alpha*velMagnitude;
         Vector2 move = moveFactor * ((1 - Beta)*currentForce + Beta*fallenAgentVec);
@@ -356,7 +376,11 @@ public class Agent : MonoBehaviour {
         fieldOfView.visWide = viswide;
         rightHandAngleMultiplier = 1.0f;
         num_agents_ahead = 0;
+        Beta = 0;
         repelForce = Vector2.zero;
+
+        if (panicMeter > 0)
+            panicMeter--;
     }
 
     // Radius of the agent's influence semicircle for density calculation, set to 2.0 for now
@@ -439,6 +463,13 @@ public class Agent : MonoBehaviour {
             // v2fAdd(vel, a, deltaT, vel);
             return vel.magnitude + acceleration * Time.fixedDeltaTime;
         }
+    }
+
+    void becomePanicked() {
+        maxVelocity *= 2;
+        acceleration *= 3;
+        personalSpace *= 0.6f; //Decrease personalspace to push other agents more easily
+        panic = true;
     }
 
     float computeAlpha() {
