@@ -373,6 +373,7 @@ public class FieldOfView : MonoBehaviour
             }
             else
             {
+                Debug.Log(" I SEE WALL");
                 // Check for collision with wall
                 //float distanceToTarget1 = Vector3.Distance(transform.position, target.position);
                 //float distance = (transform.position - target.position).magnitude;

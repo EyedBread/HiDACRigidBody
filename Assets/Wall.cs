@@ -23,7 +23,7 @@ public class Wall : MonoBehaviour
 
         end = new Vector2(transform.position.x + Mathf.Cos(radians - Mathf.PI) * transform.localScale.x/2, transform.position.y + Mathf.Sin(radians - Mathf.PI) * transform.localScale.x/2);
 
-        Debug.Log("Wall normal: " + wallNormal + ", start: " + start + ", end: " + end);
+        // Debug.Log("Wall normal: " + wallNormal + ", start: " + start + ", end: " + end);
         
     }
 
