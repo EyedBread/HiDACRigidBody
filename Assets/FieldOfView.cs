@@ -311,7 +311,7 @@ public class FieldOfView : MonoBehaviour
         // Find walls in range
         Collider2D[] wallsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, wallMask);
         if (wallsInRange.Length > 0) {
-            Debug.Log(gameObject.name + "Sees WALL");
+            // Debug.Log(gameObject.name + "Sees WALL");
         }
         CheckVisibleAndCollidedObjects(wallsInRange, visibleWalls, collidedWalls, myPersonalSpace, false);
     }
@@ -361,42 +361,42 @@ public class FieldOfView : MonoBehaviour
                 visibleList.Add(target);
             }
 
-            if (isAgent)
-            {
-                Agent agent = target.GetComponent<Agent>();
-                // Check for collision
-                //float distance = (transform.position - target.position).magnitude;
-                if (distanceToTarget < myRadius + personalSpace && !agent.fallen())
-                {
-                    collidedList.Add(target);
-                }
-            }
-            else
-            {
-                Debug.Log(" I SEE WALL");
-                // Check for collision with wall
-                //float distanceToTarget1 = Vector3.Distance(transform.position, target.position);
-                //float distance = (transform.position - target.position).magnitude;
+            // if (isAgent)
+            // {
+            //     Agent agent = target.GetComponent<Agent>();
+            //     // Check for collision
+            //     //float distance = (transform.position - target.position).magnitude;
+            //     if (distanceToTarget < myRadius + personalSpace && !agent.fallen())
+            //     {
+            //         collidedList.Add(target);
+            //     }
+            // }
+            // else
+            // {
+            //     // Debug.Log(" I SEE WALL");
+            //     // Check for collision with wall
+            //     //float distanceToTarget1 = Vector3.Distance(transform.position, target.position);
+            //     //float distance = (transform.position - target.position).magnitude;
 
-                //BoxCollider2D wallCollider = target.GetComponent<BoxCollider2D>();
-                //Vector2 worldSize = target.TransformVector(wallCollider.size);
-                //Debug.Log(worldSize);
-                //float wallThickness = Mathf.Min(Mathf.Abs(worldSize.x), Mathf.Abs(worldSize.y));
+            //     //BoxCollider2D wallCollider = target.GetComponent<BoxCollider2D>();
+            //     //Vector2 worldSize = target.TransformVector(wallCollider.size);
+            //     //Debug.Log(worldSize);
+            //     //float wallThickness = Mathf.Min(Mathf.Abs(worldSize.x), Mathf.Abs(worldSize.y));
 
-                BoxCollider2D wallCollider = target.GetComponent<BoxCollider2D>();
-                float wallThickness = wallCollider.size.y;
-                //Debug.Log(wallThickness);
+            //     BoxCollider2D wallCollider = target.GetComponent<BoxCollider2D>();
+            //     float wallThickness = wallCollider.size.y;
+            //     //Debug.Log(wallThickness);
 
-                //bool colliderContainsTransform = wallCollider.bounds.Contains(transform.position);
-                //Debug.Log(colliderContainsTransform);
+            //     //bool colliderContainsTransform = wallCollider.bounds.Contains(transform.position);
+            //     //Debug.Log(colliderContainsTransform);
 
-                RaycastHit2D hit1 = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, wallMask);
-                if (hit1.collider != null && hit1.collider.transform == target && distanceToTarget < myRadius + wallThickness / 2)
-                {
-                    Debug.Log(gameObject.name + " collided with " + target.name);
-                    collidedList.Add(target);
-                }
-            }
+            //     RaycastHit2D hit1 = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, wallMask);
+            //     if (hit1.collider != null && hit1.collider.transform == target && distanceToTarget < myRadius + wallThickness / 2)
+            //     {
+            //         Debug.Log(gameObject.name + " collided with " + target.name);
+            //         collidedList.Add(target);
+            //     }
+            // }
         }
     }
 }

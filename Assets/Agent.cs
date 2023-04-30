@@ -47,9 +47,10 @@ public class Agent : MonoBehaviour {
 
         return nearbyObjects;
     }
-    void AgentFalls()
+    public void AgentFalls()
     {
         // Your falling logic here
+        isFallen = true;
 
         // Change the agent's layer to "FallenAgent"
         gameObject.layer = LayerMask.NameToLayer("FallenAgent");
@@ -62,9 +63,15 @@ public class Agent : MonoBehaviour {
 
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
+        // PushableObject pushableObject= GetComponent<PushableObject>();
+
+        // if (pushableObject != null) {
+        //     Destroy(pushableObject);
+        // }
+
         if (circleCollider != null)
         {
-
+            Destroy(circleCollider);
         }
 
     }
@@ -114,11 +121,15 @@ public class Agent : MonoBehaviour {
     
         if (Vector2.Dot(myDir, otherDir) >= 0.655f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
         {
+            Debug.Log(gameObject.name + "Is waiting!");
             waiting = true;
             waitTime = rand.Next(1,50);
         }
         return tforce * distweight * dirweight;
     }
+
+    // PushableObject pushableObject;
+
 
     void Start()
     {
@@ -129,10 +140,13 @@ public class Agent : MonoBehaviour {
         fieldOfView = GetComponent<FieldOfView>();
         agentCollisionHandler = this.GetComponent<AgentCollisionHandler>();
         agentCollider = GetComponent<CircleCollider2D>();
+        // pushableObject = GetComponent<PushableObject>();
         lastPos = transform.position;
         radius = agentCollider.radius;
         if (isFallen) 
             AgentFalls();
+        if (panic)
+            becomePanicked();
     }
 
     Vector2 lastPos;
@@ -175,6 +189,10 @@ public class Agent : MonoBehaviour {
         currentForce += forceAttractor;
 
         fieldOfView.FindVisibleTargets();
+
+        //Get all current collisions with agent
+        List<Transform> collidedList = agentCollisionHandler.collidedObjects;
+
         //CASE AGENT --------------------------------------------------------------
         if (panic)
             agentWeight = 10;
@@ -195,6 +213,8 @@ public class Agent : MonoBehaviour {
             fieldOfView.visLong = 8;
             rightHandAngleMultiplier = 1.0f;
         }
+
+
 
         foreach (Transform visibleAgent in fieldOfView.visibleAgents) 
         {
@@ -242,7 +262,7 @@ public class Agent : MonoBehaviour {
         // }
 
         //CASE WALL ----------------------------------------------------------------
-        wallWeight = 1;
+        wallWeight = 8;
         foreach (Transform visibleWall in fieldOfView.visibleWalls)
         {
             // Debug.Log("SEE WALL");
@@ -257,10 +277,12 @@ public class Agent : MonoBehaviour {
                 float wallRotation = wallCollider.transform.eulerAngles.z;
                 float radians = wallRotation * Mathf.Deg2Rad;
                 wallNorm = new Vector2(Mathf.Cos(radians + Mathf.PI / 2), Mathf.Sin(radians + Mathf.PI / 2));
+                // Debug.Log(wallNorm);
             }
 
             Vector2 tempForce = GeometryUtils.CrossAndRecross(wallNorm, rb.velocity);
-            tempForce.Normalize();
+            // tempForce.Normalize();
+            // Debug.Log(tempForce);
             tempForce *= wallWeight;
             currentForce += tempForce;
         }
@@ -313,21 +335,76 @@ public class Agent : MonoBehaviour {
             fallenAgentVec += tempForce;
         }
 
+        //REPULSION FORCES
+        foreach(Transform otherTransform in collidedList) {
+
+            BoxCollider2D wallCollider = otherTransform.GetComponent<BoxCollider2D>();
+            CircleCollider2D collidedAgentCircleCollider = otherTransform.GetComponent<CircleCollider2D>();
+
+            if (wallCollider != null) {
+                //WALL REPULSION FORCES
+                Debug.Log("COLLIDING WITH WALL");
+                float distance = (otherTransform.position - transform.position).magnitude;
+                lambda = 0.3f;
+                // Interact with visible and collided walls
+                float k = (agentCollider.radius + personalSpace - distance) / distance;
+
+                float wallRotation = wallCollider.transform.eulerAngles.z;
+                float radians = wallRotation * Mathf.Deg2Rad;
+                Vector2 wallNorm = new Vector2(Mathf.Cos(radians + Mathf.PI / 2), Mathf.Sin(radians + Mathf.PI / 2));
+
+                Vector2 currWallRepelForce = wallNorm * k;
+
+                if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
+                {
+                    repelForceFromWalls += currWallRepelForce;
+                }
+            }
+            else if (collidedAgentCircleCollider != null) {
+
+                Debug.Log("COLLIDING WITH AGENT");
+                // i is this agent, j is the other agent
+                // d_ji is the distance between their centers
+                // ep is the person
+                // formula for agent: (pos_i - pos_j)*(r_i + ep_i + r_j - d_ji)/ d_ji
+                Agent otherAgent = otherTransform.GetComponent<Agent>();
+                Rigidbody2D collidedAgentRigidbody = otherTransform.GetComponent<Rigidbody2D>();
+
+                // Interact with collided agents
+                Vector2 jtoi = transform.position - otherTransform.position;
+
+                float collidedAgentRadius = collidedAgentCircleCollider.radius;
+                
+                float k = (agentCollider.radius + personalSpace + collidedAgentRadius - jtoi.magnitude) / (jtoi.magnitude);
+
+                repelForceFromAgents += jtoi * k;
+            }
+            
+            else {
+                //Couldn't determine what I was colliding with, Error!
+                Debug.Log("HELP!");
+            }
+
+        }
+
         // gameObject.transform.position = new Vector3(pos.x, pos.y, 0);
         repelForceFromAgents *= lambda;
         repelForce = repelForceFromAgents + repelForceFromWalls;
+        // float magRepelForce = pushableObject.getTotalCollisionForce();
 
+        
         if (repelForce.magnitude > repelsionMagThreshold) {
             //FALL DOWN AND DIE!
             Debug.Log(gameObject.name + " HAS FALLEN");
-            isFallen = true;
             rb.velocity = Vector2.zero;
             AgentFalls();
         }
 
+        // repelForceFromAgents = pushableObject.getAgentCollisionVec();
+
         if (Vector2.Dot(vel, repelForceFromAgents) < 0 && !panic)
         {
-            // Debug.Log("STOPPING");
+            Debug.Log("STOPPING");
             stopping = true;
             stoptime = rand.Next(1,150);
             vel = Vector2.zero;
