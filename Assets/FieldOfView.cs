@@ -357,7 +357,7 @@ public class FieldOfView : MonoBehaviour
 
             if (!hit || hit.collider.transform == target)
             {
-                Debug.Log(gameObject.name + " Sees " + target.name);
+                // Debug.Log(gameObject.name + " Sees " + target.name);
                 visibleList.Add(target);
             }
 

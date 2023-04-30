@@ -221,25 +221,25 @@ public class Agent : MonoBehaviour {
         }
 
         //Repulsion forces with other agents!!!
-        foreach(Transform collidedAgent in fieldOfView.collidedAgents)
-        {
-                // i is this agent, j is the other agent
-                // d_ji is the distance between their centers
-                // ep is the person
-                // formula for agent: (pos_i - pos_j)*(r_i + ep_i + r_j - d_ji)/ d_ji
-                Agent otherAgent = collidedAgent.GetComponent<Agent>();
-                Rigidbody2D collidedAgentRigidbody = collidedAgent.GetComponent<Rigidbody2D>();
-                CircleCollider2D collidedAgentCircleCollider = collidedAgent.GetComponent<CircleCollider2D>();
+        // foreach(Transform collidedAgent in fieldOfView.collidedAgents)
+        // {
+        //         // i is this agent, j is the other agent
+        //         // d_ji is the distance between their centers
+        //         // ep is the person
+        //         // formula for agent: (pos_i - pos_j)*(r_i + ep_i + r_j - d_ji)/ d_ji
+        //         Agent otherAgent = collidedAgent.GetComponent<Agent>();
+        //         Rigidbody2D collidedAgentRigidbody = collidedAgent.GetComponent<Rigidbody2D>();
+        //         CircleCollider2D collidedAgentCircleCollider = collidedAgent.GetComponent<CircleCollider2D>();
 
-                // Interact with collided agents
-                Vector2 jtoi = transform.position - collidedAgent.position;
+        //         // Interact with collided agents
+        //         Vector2 jtoi = transform.position - collidedAgent.position;
 
-                float collidedAgentRadius = collidedAgentCircleCollider.radius;
+        //         float collidedAgentRadius = collidedAgentCircleCollider.radius;
                 
-                float k = (agentCollider.radius + personalSpace + collidedAgentRadius - jtoi.magnitude) / (jtoi.magnitude);
+        //         float k = (agentCollider.radius + personalSpace + collidedAgentRadius - jtoi.magnitude) / (jtoi.magnitude);
 
-                repelForceFromAgents += jtoi * k;
-        }
+        //         repelForceFromAgents += jtoi * k;
+        // }
 
         //CASE WALL ----------------------------------------------------------------
         wallWeight = 1;
@@ -266,26 +266,26 @@ public class Agent : MonoBehaviour {
         }
 
         //Repulsion forces with other walls
-        foreach( Transform collidedWall in fieldOfView.collidedWalls)
-        {
-            Debug.Log("COLLIDING WITH WALL");
-            float distance = (collidedWall.position - transform.position).magnitude;
-            lambda = 0.3f;
-            BoxCollider2D wallCollider = collidedWall.GetComponent<BoxCollider2D>();
-            // Interact with visible and collided walls
-            float k = (agentCollider.radius + personalSpace - distance) / distance;
+        // foreach( Transform collidedWall in fieldOfView.collidedWalls)
+        // {
+        //     Debug.Log("COLLIDING WITH WALL");
+        //     float distance = (collidedWall.position - transform.position).magnitude;
+        //     lambda = 0.3f;
+        //     BoxCollider2D wallCollider = collidedWall.GetComponent<BoxCollider2D>();
+        //     // Interact with visible and collided walls
+        //     float k = (agentCollider.radius + personalSpace - distance) / distance;
 
-            float wallRotation = wallCollider.transform.eulerAngles.z;
-            float radians = wallRotation * Mathf.Deg2Rad;
-            Vector2 wallNorm = new Vector2(Mathf.Cos(radians + Mathf.PI / 2), Mathf.Sin(radians + Mathf.PI / 2));
+        //     float wallRotation = wallCollider.transform.eulerAngles.z;
+        //     float radians = wallRotation * Mathf.Deg2Rad;
+        //     Vector2 wallNorm = new Vector2(Mathf.Cos(radians + Mathf.PI / 2), Mathf.Sin(radians + Mathf.PI / 2));
 
-            Vector2 currWallRepelForce = wallNorm * k;
+        //     Vector2 currWallRepelForce = wallNorm * k;
 
-            if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
-            {
-                repelForceFromWalls += currWallRepelForce;
-            }
-        }
+        //     if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
+        //     {
+        //         repelForceFromWalls += currWallRepelForce;
+        //     }
+        // }
 
         //CASE FALLEN AGENT -------------------------------------------------------
         if ((fieldOfView.visibleFallenAgents.Count > 4 || panicMeter > 10) && !panic) {
