@@ -424,9 +424,10 @@ public class Agent : MonoBehaviour {
         float moveFactor = alpha*velMagnitude;
         Vector2 move = moveFactor * ((1 - Beta)*currentForce + Beta*fallenAgentVec);
         // Vector2 desiredPosition = move + repelForce;
+        rb.AddForce(currentForce);
 
         // Vector2 lastPos = transform.position;
-        rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime ); //+ 0.1f*repelForce
+        // rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime ); //+ 0.1f*repelForce
         // rb.MovePosition(Vector2.zero);
         vel = ( (Vector2)transform.position - lastPos ) / Time.fixedDeltaTime; 
         Vector2 dir = vel.normalized;
@@ -435,7 +436,7 @@ public class Agent : MonoBehaviour {
         rb.MoveRotation(angleInDegrees); //TODO : Why doesn't this work????
         transform.rotation = Quaternion.Euler(0, 0, angleInDegrees);
         lastPos = transform.position;
-        rb.velocity = vel; 
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
 
         //RESET
         stoptime--;
