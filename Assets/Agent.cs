@@ -203,14 +203,14 @@ public class Agent : MonoBehaviour {
         //but when the crowd is very dense, then the right preference is not so obvious and several bidirectional flows can emerge (Di/=2). 
         // Modifying the length of the collision avoidance rectangle and reducing the angle for right preference based on perceived density achieves this behavior. 
         if (num_agents_ahead > 8 ) {
-            vislong = 4;
-            fieldOfView.visLong = 4;
+            vislong = 1.5f;
+            fieldOfView.visLong = 1.5f;
             rightHandAngleMultiplier = 0.1f;
             panicMeter++; //
         }
         else {
-            vislong = 8;
-            fieldOfView.visLong = 8;
+            vislong = 3;
+            fieldOfView.visLong = 3;
             rightHandAngleMultiplier = 1.0f;
         }
 
@@ -312,7 +312,7 @@ public class Agent : MonoBehaviour {
         //CASE FALLEN AGENT -------------------------------------------------------
         if ((fieldOfView.visibleFallenAgents.Count > 4 || panicMeter > 10) && !panic) {
             //IDK, become panicked when you see 4 or more fallen agents simultaneously
-            // And when panicMeter
+            // And when panicMeter is too high
             becomePanicked();
         }
 
@@ -361,8 +361,6 @@ public class Agent : MonoBehaviour {
                 }
             }
             else if (collidedAgentCircleCollider != null) {
-
-                Debug.Log("COLLIDING WITH AGENT");
                 // i is this agent, j is the other agent
                 // d_ji is the distance between their centers
                 // ep is the person
@@ -428,7 +426,7 @@ public class Agent : MonoBehaviour {
         // Vector2 desiredPosition = move + repelForce;
 
         // Vector2 lastPos = transform.position;
-        rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime + 0.1f*repelForce);
+        rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime ); //+ 0.1f*repelForce
         // rb.MovePosition(Vector2.zero);
         vel = ( (Vector2)transform.position - lastPos ) / Time.fixedDeltaTime; 
         Vector2 dir = vel.normalized;
@@ -520,7 +518,7 @@ public class Agent : MonoBehaviour {
 
     // Vision range - to calculate a vision rectangle, look out vislong units along velocity vector, then look by viswide / 2 units. 
     public float vislong = 3.0f;
-    public float viswide = 2.0f;
+    public float viswide = 1.5f;
 
     // Attractor
     public Vector2 attractor;

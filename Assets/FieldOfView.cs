@@ -286,7 +286,6 @@ public class FieldOfView : MonoBehaviour
     void FindVisibleObjects()
     {
         //Update values that may have changed
-        myPersonalSpace = agent.getPersonalSpace();
         visLong = agent.vislong;
         visWide = agent.viswide;
 
@@ -300,11 +299,11 @@ public class FieldOfView : MonoBehaviour
 
         // Find agents in range
         Collider2D[] agentsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, agentMask);
-        CheckVisibleAndCollidedObjects(agentsInRange, visibleAgents, collidedAgents, myPersonalSpace, true);
+        CheckVisibleAndCollidedObjects(agentsInRange, visibleAgents, collidedAgents, true);
 
         //Find fallen agents in range
         Collider2D[] fallenAgentsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, fallenAgentMask);
-        CheckVisibleAndCollidedObjects(fallenAgentsInRange, visibleFallenAgents, collidedAgents, myPersonalSpace, true);
+        CheckVisibleAndCollidedObjects(fallenAgentsInRange, visibleFallenAgents, collidedAgents, true);
 
         DebugDrawBox((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, Color.yellow, 0.01f);
 
@@ -313,7 +312,7 @@ public class FieldOfView : MonoBehaviour
         if (wallsInRange.Length > 0) {
             // Debug.Log(gameObject.name + "Sees WALL");
         }
-        CheckVisibleAndCollidedObjects(wallsInRange, visibleWalls, collidedWalls, myPersonalSpace, false);
+        CheckVisibleAndCollidedObjects(wallsInRange, visibleWalls, collidedWalls, false);
     }
 
     void DebugDrawBox( Vector2 point, Vector2 size, float angle, Color color, float duration) {
@@ -337,7 +336,7 @@ public class FieldOfView : MonoBehaviour
         Debug.DrawLine(bottomLeft, topLeft, color, duration);
     }
 
-    void CheckVisibleAndCollidedObjects(Collider2D[] targetsInRange, List<Transform> visibleList, List<Transform> collidedList, float personalSpace, bool isAgent)
+    void CheckVisibleAndCollidedObjects(Collider2D[] targetsInRange, List<Transform> visibleList, List<Transform> collidedList, bool isAgent)
     {
         for (int i = 0; i < targetsInRange.Length; i++)
         {

@@ -6,19 +6,21 @@ public class AgentCollisionHandler : MonoBehaviour
     [HideInInspector]
     public List<Transform> collidedObjects = new List<Transform>();
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collidedObjects.Contains(other.transform))
+        Transform other = collision.transform;
+        if (!collidedObjects.Contains(other))
         {
-            collidedObjects.Add(other.transform);
+            collidedObjects.Add(other);
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnCollisionExit2D(Collision2D collision)
     {
-        if (collidedObjects.Contains(other.transform))
+        Transform other = collision.transform;
+        if (collidedObjects.Contains(other))
         {
-            collidedObjects.Remove(other.transform);
+            collidedObjects.Remove(other);
         }
     }
 }

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 786408df84c86ce4fb0e8e19b3401981
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - wallPrefab: {fileID: 2954172035330002067, guid: df76b5a1b0ccccd4aba8dd90935856b2, type: 3}
+  - cornerPrefab: {fileID: 6574388185207445849, guid: 3e2a027b1a28e7043a882e68962d04b4, type: 3}
+  - doorPrefab: {fileID: 4945181199566591907, guid: 07b61cbcd2a382342844407e7a05b14b, type: 3}
+  - windowPrefab: {fileID: 2954172035330002067, guid: df76b5a1b0ccccd4aba8dd90935856b2, type: 3}
+  - stairsPrefab: {instanceID: 0}
+  - holePrefab: {instanceID: 0}
+  - polePrefab: {instanceID: 0}
+  - columnPrefab: {instanceID: 0}
+  - floorPrefab: {fileID: 6456632601687071632, guid: 764885fc4f463854389b492af6bdb6d1, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
