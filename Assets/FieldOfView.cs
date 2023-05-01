@@ -285,9 +285,11 @@ public class FieldOfView : MonoBehaviour
 
     void FindVisibleObjects()
     {
+        // Debug.Log("hej");
         //Update values that may have changed
         visLong = agent.vislong;
         visWide = agent.viswide;
+        // Debug.Log("Yas");
 
         // Direction of agent
         float alpha = transform.eulerAngles.z;

@@ -13,6 +13,7 @@ MonoImporter:
   - polePrefab: {instanceID: 0}
   - columnPrefab: {instanceID: 0}
   - floorPrefab: {fileID: 6456632601687071632, guid: 764885fc4f463854389b492af6bdb6d1, type: 3}
+  - floor_9Prefab: {fileID: 7210009738346416927, guid: d08a37aa506d50d448b2741a800e2555, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -137,6 +137,22 @@ public class Agent : MonoBehaviour {
 
     void Start()
     {
+        // Get the number of child GameObjects
+        int childCount = transform.childCount;
+
+        // If there is at least one child GameObject, get the reference to the first one
+        if (childCount > 0)
+        {
+            Transform firstChildTransform = transform.GetChild(0);
+            GameObject firstChildGameObject = firstChildTransform.gameObject;
+
+            // Now you have a reference to the first child GameObject
+            Debug.Log("The name of the first child GameObject is: " + firstChildGameObject.name);
+
+            dummyAgent = firstChildGameObject.GetComponent<NavMeshAgent>();
+        }
+
+        // dummyAgent = this.GetComponent<NavMeshAgent>();
 
         if (dummyAgent == null)
         {
