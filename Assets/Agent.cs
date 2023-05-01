@@ -438,6 +438,9 @@ public class Agent : MonoBehaviour {
         lastPos = transform.position;
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
 
+        if (waiting || stopping) {
+            rb.velocity = Vector2.zero;
+        }
         //RESET
         stoptime--;
         if (stoptime == 0)
