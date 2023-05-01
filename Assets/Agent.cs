@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 using System.IO;
 using System;
@@ -10,6 +10,10 @@ using System;
 
 public class Agent : MonoBehaviour {
     public const float epsilon = 0.05f;
+    [SerializeField] public NavMeshAgent dummyAgent;
+    private List<Vector3> waypoints;
+    private int currentCornerIndex = 0;
+    private Vector3 previousTargetPosition;
 
     private FieldOfView fieldOfView;
 
@@ -121,6 +125,21 @@ public class Agent : MonoBehaviour {
 
     void Start()
     {
+
+        if (dummyAgent == null)
+        {
+            Debug.LogError("Dummy agent is not assigned or does not have a NavMeshAgent component.");
+            return;
+        }
+        waypoints = new List<Vector3>();
+        Debug.Log("Calling CalculateWaypoints from Start");
+        StartCoroutine(CalculateWaypoints());
+        previousTargetPosition = attractorFinalGoal;
+
+        dummyAgent.updatePosition = false; // Prevent NavMeshAgent from controlling the GameObject's position
+        dummyAgent.updateRotation = false; // Prevent NavMeshAgent from controlling the GameObject's rotation
+
+
         pos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         // Debug.Log("Position: " + pos);
         rb = this.GetComponent<Rigidbody2D>();
@@ -138,12 +157,41 @@ public class Agent : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
+
         //Skip looping
         if (isFallen) {
             rb.velocity = Vector2.zero;
             return;
         }
+        
+        // Calculate waypoints when the target position changes
+        if (previousTargetPosition != attractorFinalGoal)
+        {
             
+            StartCoroutine(CalculateWaypoints());
+            previousTargetPosition = attractorFinalGoal;
+            currentCornerIndex = 0;
+
+        }
+
+        // Use the waypoints as attractors in your HiDAC model
+        if (waypoints != null && currentCornerIndex < waypoints.Count)
+        {
+            Vector3 targetWayPoint = waypoints[currentCornerIndex];
+            // Use targetCorner as an attractor in your HiDAC model
+            attractor = targetWayPoint;
+
+            float distanceToCurrentWaypoint = Vector3.Distance(transform.position, targetWayPoint);
+            Debug.Log("Distance to current waypoint: " + distanceToCurrentWaypoint);
+
+            // Check if the agent has reached the current corner
+            if (Vector3.Distance(transform.position, targetWayPoint) < 1)
+            {
+                Debug.Log("Reached waypoint !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + currentCornerIndex);
+                currentCornerIndex++;
+            }
+        }
+
         float lambda = 1.0f;
 
         Vector2 repelForceFromAgents = Vector2.zero;
@@ -166,7 +214,7 @@ public class Agent : MonoBehaviour {
             attractorWeight = 10;
 
         Vector2 forceAttractor = attract * attractorWeight;
-
+        //Debug.Log("FORCEATTRACTOR: " + forceAttractor);
         currentForce += forceAttractor;
 
         fieldOfView.FindVisibleTargets();
@@ -241,6 +289,7 @@ public class Agent : MonoBehaviour {
         }
 
         //Repulsion forces with other walls
+        /*
         foreach( Transform collidedWall in fieldOfView.collidedWalls)
         {
             Debug.Log("COLLIDING WITH WALL");
@@ -260,7 +309,7 @@ public class Agent : MonoBehaviour {
             {
                 repelForceFromWalls += currWallRepelForce;
             }
-        }
+        }*/
 
         //CASE FALLEN AGENT -------------------------------------------------------
         foreach (Transform visibleFallenAgent in fieldOfView.visibleFallenAgents)
@@ -314,9 +363,9 @@ public class Agent : MonoBehaviour {
         float moveFactor = alpha*velMagnitude;
         Vector2 move = moveFactor * ((1 - Beta)*currentForce + Beta*fallenAgentVec);
         // Vector2 desiredPosition = move + repelForce;
-
+        rb.AddForce(currentForce);
         // Vector2 lastPos = transform.position;
-        rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime + 0.1f*repelForce);
+        // rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime + 0.1f*repelForce);
         // rb.MovePosition(Vector2.zero);
         vel = ( (Vector2)transform.position - lastPos ) / Time.fixedDeltaTime; 
         Vector2 dir = vel.normalized;
@@ -325,7 +374,7 @@ public class Agent : MonoBehaviour {
         rb.MoveRotation(angleInDegrees); //TODO : Why doesn't this work????
         transform.rotation = Quaternion.Euler(0, 0, angleInDegrees);
         lastPos = transform.position;
-        rb.velocity = vel; 
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
 
         //RESET
         stoptime--;
@@ -344,6 +393,56 @@ public class Agent : MonoBehaviour {
         repelForce = Vector2.zero;
     }
 
+    private IEnumerator CalculateWaypoints()
+    {
+        Debug.Log("Target position: " + attractorFinalGoal);
+        // Update the dummy agent's position to match the actual agent's position
+        dummyAgent.transform.position = transform.position;
+
+        bool x = dummyAgent.SetDestination(attractorFinalGoal);
+        Debug.Log(x);
+
+        waypoints.Clear();
+
+        // Wait for the path calculation to complete
+        while (dummyAgent.pathPending)
+        {
+            yield return null;
+        }
+
+        if (dummyAgent.hasPath)
+        {
+            Debug.Log("Dummy agent has a path!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.");
+            foreach (var corner in dummyAgent.path.corners)
+            {
+                Debug.Log("added waypoint ");
+                waypoints.Add(corner);
+            }
+        }
+        else
+        {
+            Debug.Log("Dummy agent does not have a path.");
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        if (waypoints != null && waypoints.Count > 1)
+        {
+            Gizmos.color = Color.green;
+
+            for (int i = 0; i < waypoints.Count - 1; i++)
+            {
+                Gizmos.DrawLine(waypoints[i], waypoints[i + 1]);
+            }
+        }
+        else
+        {
+            //Debug.Log("Waypoints list is empty or contains only one waypoint.");
+        }
+    }
+
+
     // Radius of the agent's influence semicircle for density calculation, set to 2.0 for now
     public float R = 2.0f;
 
@@ -358,7 +457,7 @@ public class Agent : MonoBehaviour {
     }
 
     // Weights - avoidance weights
-    public float attractorWeight = 1;
+    public float attractorWeight = 10;
     public float wallWeight = 1;
     public float agentWeight = 1;
 
@@ -408,6 +507,10 @@ public class Agent : MonoBehaviour {
 
     // Attractor
     public Vector2 attractor;
+
+    // Attractor final goal
+    [SerializeField]
+    public Vector3 attractorFinalGoal;
 
     float computeVel(float deltaT) {
         // Implementation goes here
