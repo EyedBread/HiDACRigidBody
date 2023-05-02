@@ -2789,8 +2789,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911913956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.476, y: 0.4069, z: -10}
+  m_LocalScale: {x: 1.9519755, y: 1.8141346, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4998,8 +4998,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710270815}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.476, y: 0.4069, z: 0}
+  m_LocalScale: {x: 1.9519755, y: 1, z: 1.8141346}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 939563239}
@@ -5340,10 +5340,10 @@ MonoBehaviour:
   AgentPrefab: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
   DummyAgentPrefab: {fileID: 7920284820097666359, guid: 2847f15d2e11675478842b0784c8c27b, type: 3}
   agentManager: {fileID: 1448196120}
-  NumberOfAgents: 1000
-  WorldX: 10
-  WorldY: 9
-  Margin: 0.1
+  NumberOfAgents: 400
+  WorldX: 100
+  WorldY: 85
+  Margin: 10
 --- !u!4 &1764108315
 Transform:
   m_ObjectHideFlags: 0

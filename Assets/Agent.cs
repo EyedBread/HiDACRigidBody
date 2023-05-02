@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
 using System.IO;
 using System;
 
@@ -153,8 +152,12 @@ public class Agent : MonoBehaviour {
         }
 
         //TODO : HARDCODED VALUES FOR CHECKING TIME.
-        attractorFinalGoal = (Vector2) gameObject.transform.position;
-        attractor = gameObject.transform.position;
+
+        float x = UnityEngine.Random.Range(Margin, WorldX - Margin);
+        float y = UnityEngine.Random.Range(Margin, WorldY - Margin);
+        attractorFinalGoal = new Vector2(x, y);
+        // attractorFinalGoal = (Vector2) gameObject.transform.position;
+        attractor = attractorFinalGoal;
 
         // dummyAgent = this.GetComponent<NavMeshAgent>();
 
@@ -192,6 +195,10 @@ public class Agent : MonoBehaviour {
     //For every iteration, decrement by 1. Int is always 0 or positive. For each panicked agent in vision or high crowd ahead, increment by 1
     int panicMeter = 0;
 
+    public float WorldX = 10f;
+    public float WorldY = 10f;
+    public float Margin = 0.1f;
+
     // Update is called once per frame
     public void AgentFixedUpdate()
     {
@@ -225,9 +232,16 @@ public class Agent : MonoBehaviour {
             // Check if the agent has reached the current corner
             if (Vector3.Distance(transform.position, targetWayPoint) < 1)
             {
-                Debug.Log("Reached waypoint !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + currentCornerIndex);
+                // Debug.Log("Reached waypoint !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + currentCornerIndex);
                 currentCornerIndex++;
             }
+        }
+        else if (currentCornerIndex == waypoints.Count) { //Reset finalGoal for new task
+            // Debug.Log("New waypoint");
+            // Generate random position within the specified constraints
+            float x = UnityEngine.Random.Range(Margin, WorldX - Margin);
+            float y = UnityEngine.Random.Range(Margin, WorldY - Margin);
+            attractorFinalGoal = new Vector2(x, y);
         }
 
         float lambda = 1.0f;

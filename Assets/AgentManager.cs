@@ -4,12 +4,14 @@ using UnityEngine;
 public class AgentManager : MonoBehaviour
 {
     public List<GameObject> agents;
-    private float timeStep;
+    private List<float> timeSteps;
+    private int stepCounter;
 
     void Start()
     {
-        // Initialize the timeStep variable
-        timeStep = 0f;
+        // Initialize the timeSteps list and stepCounter
+        timeSteps = new List<float>();
+        stepCounter = 0;
     }
 
     void FixedUpdate()
@@ -34,10 +36,23 @@ public class AgentManager : MonoBehaviour
         float endTime = Time.realtimeSinceStartup;
 
         // Calculate the timeStep
-        timeStep = endTime - startTime;
+        float timeStep = endTime - startTime;
+        timeSteps.Add(timeStep);
 
-        // You can print the timeStep to the console for debugging purposes
-        Debug.Log($"Time step: {timeStep * 1000f} ms");
+        stepCounter++;
+
+        if (stepCounter == 100)
+        {
+            // Calculate the median
+            timeSteps.Sort();
+            float median = (timeSteps[49] + timeSteps[50]) / 2;
+
+            // Print the median timestep
+            Debug.Log($"Median time step: {median * 1000f} ms");
+
+            // Reset the timeSteps list and stepCounter
+            timeSteps.Clear();
+            stepCounter = 0;
+        }
     }
 }
-
