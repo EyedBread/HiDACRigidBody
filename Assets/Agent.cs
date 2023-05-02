@@ -59,7 +59,7 @@ public class Agent : MonoBehaviour {
         // Change the agent's layer to "FallenAgent"
         gameObject.layer = LayerMask.NameToLayer("FallenAgent");
 
-        Debug.Log(gameObject.name + " HAS FALLEN");
+        // Debug.Log(gameObject.name + " HAS FALLEN");
 
         // Adjust the agent's collider
         CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
@@ -125,7 +125,7 @@ public class Agent : MonoBehaviour {
     
         if (Vector2.Dot(myDir, otherDir) >= 0.655f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
         {
-            Debug.Log(gameObject.name + "Is waiting!");
+            // Debug.Log(gameObject.name + "Is waiting!");
             waiting = true;
             waitTime = rand.Next(1,50);
         }
@@ -147,10 +147,14 @@ public class Agent : MonoBehaviour {
             GameObject firstChildGameObject = firstChildTransform.gameObject;
 
             // Now you have a reference to the first child GameObject
-            Debug.Log("The name of the first child GameObject is: " + firstChildGameObject.name);
+            // Debug.Log("The name of the first child GameObject is: " + firstChildGameObject.name);
 
             dummyAgent = firstChildGameObject.GetComponent<NavMeshAgent>();
         }
+
+        //TODO : HARDCODED VALUES FOR CHECKING TIME.
+        attractorFinalGoal = (Vector2) gameObject.transform.position;
+        attractor = gameObject.transform.position;
 
         // dummyAgent = this.GetComponent<NavMeshAgent>();
 
@@ -160,7 +164,7 @@ public class Agent : MonoBehaviour {
             return;
         }
         waypoints = new List<Vector3>();
-        Debug.Log("Calling CalculateWaypoints from Start");
+        // Debug.Log("Calling CalculateWaypoints from Start");
         StartCoroutine(CalculateWaypoints());
         previousTargetPosition = attractorFinalGoal;
 
@@ -189,7 +193,7 @@ public class Agent : MonoBehaviour {
     int panicMeter = 0;
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void AgentFixedUpdate()
     {
 
         //Skip looping
@@ -216,7 +220,7 @@ public class Agent : MonoBehaviour {
             attractor = targetWayPoint;
 
             float distanceToCurrentWaypoint = Vector3.Distance(transform.position, targetWayPoint);
-            Debug.Log("Distance to current waypoint: " + distanceToCurrentWaypoint);
+            // Debug.Log("Distance to current waypoint: " + distanceToCurrentWaypoint);
 
             // Check if the agent has reached the current corner
             if (Vector3.Distance(transform.position, targetWayPoint) < 1)
@@ -406,7 +410,7 @@ public class Agent : MonoBehaviour {
 
             if (wallCollider != null) {
                 //WALL REPULSION FORCES
-                Debug.Log("COLLIDING WITH WALL");
+                // Debug.Log("COLLIDING WITH WALL");
                 float distance = (otherTransform.position - transform.position).magnitude;
                 lambda = 0.3f;
                 // Interact with visible and collided walls
@@ -456,7 +460,7 @@ public class Agent : MonoBehaviour {
         
         if (repelForce.magnitude > repelsionMagThreshold) {
             //FALL DOWN AND DIE!
-            Debug.Log(gameObject.name + " HAS FALLEN");
+            // Debug.Log(gameObject.name + " HAS FALLEN");
             rb.velocity = Vector2.zero;
             AgentFalls();
         }
@@ -465,7 +469,7 @@ public class Agent : MonoBehaviour {
 
         if (Vector2.Dot(vel, repelForceFromAgents) < 0 && !panic)
         {
-            Debug.Log("STOPPING");
+            // Debug.Log("STOPPING");
             stopping = true;
             stoptime = rand.Next(1,150);
             vel = Vector2.zero;
@@ -527,12 +531,12 @@ public class Agent : MonoBehaviour {
 
     private IEnumerator CalculateWaypoints()
     {
-        Debug.Log("Target position: " + attractorFinalGoal);
+        // Debug.Log("Target position: " + attractorFinalGoal);
         // Update the dummy agent's position to match the actual agent's position
         dummyAgent.transform.position = transform.position;
 
         bool x = dummyAgent.SetDestination(attractorFinalGoal);
-        Debug.Log(x);
+        // Debug.Log(x);
 
         waypoints.Clear();
 
@@ -544,16 +548,16 @@ public class Agent : MonoBehaviour {
 
         if (dummyAgent.hasPath)
         {
-            Debug.Log("Dummy agent has a path!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.");
+            // Debug.Log("Dummy agent has a path!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.");
             foreach (var corner in dummyAgent.path.corners)
             {
-                Debug.Log("added waypoint ");
+                // Debug.Log("added waypoint ");
                 waypoints.Add(corner);
             }
         }
         else
         {
-            Debug.Log("Dummy agent does not have a path.");
+            // Debug.Log("Dummy agent does not have a path.");
         }
     }
 

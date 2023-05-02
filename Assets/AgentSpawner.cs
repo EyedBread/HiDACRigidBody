@@ -8,6 +8,9 @@ public class AgentSpawner : MonoBehaviour
     public GameObject AgentPrefab;
 
     public GameObject DummyAgentPrefab;
+
+    public AgentManager agentManager;
+
     public int NumberOfAgents;
     public float WorldX = 10f;
     public float WorldY = 10f;
@@ -45,6 +48,8 @@ public class AgentSpawner : MonoBehaviour
             // nav.autoTraverseOffMeshLink = false;
 
             dummyAgent.transform.SetParent(agent.transform);
+
+            agentManager.agents.Add(agent);
         }
     }
 }

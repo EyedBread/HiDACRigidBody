@@ -3863,6 +3863,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1448196119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1448196121}
+  - component: {fileID: 1448196120}
+  m_Layer: 0
+  m_Name: AgentManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1448196120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448196119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fae587d1688c9a41a715125622ab375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agents: []
+--- !u!4 &1448196121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448196119}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.2133356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1466181059
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,6 +4048,7 @@ GameObject:
   - component: {fileID: 1541588403}
   - component: {fileID: 1541588402}
   - component: {fileID: 1541588401}
+  - component: {fileID: 1541588404}
   m_Layer: 7
   m_Name: WallPrefab(Clone) (4)
   m_TagString: Untagged
@@ -4119,6 +4165,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!208 &1541588404
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541588399}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1542966334
 GameObject:
   m_ObjectHideFlags: 0
@@ -4942,7 +5004,7 @@ Transform:
   m_Children:
   - {fileID: 939563239}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &1710270817
 MonoBehaviour:
@@ -5277,7 +5339,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AgentPrefab: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
   DummyAgentPrefab: {fileID: 7920284820097666359, guid: 2847f15d2e11675478842b0784c8c27b, type: 3}
-  NumberOfAgents: 3
+  agentManager: {fileID: 1448196120}
+  NumberOfAgents: 1000
   WorldX: 10
   WorldY: 9
   Margin: 0.1
