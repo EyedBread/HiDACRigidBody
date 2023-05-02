@@ -12,6 +12,24 @@ public class AgentManager : MonoBehaviour
         // Initialize the timeSteps list and stepCounter
         timeSteps = new List<float>();
         stepCounter = 0;
+
+        int childCount = transform.childCount;
+
+        // If there is at least one child GameObject, get the reference to the first one
+        if (childCount > 0)
+        {
+            for (int i = 0; i < childCount; i++) {
+                Transform childTransform = transform.GetChild(i);
+                GameObject childGameObject = childTransform.gameObject;
+                agents.Add(childGameObject);
+
+            }
+
+
+            // Now you have a reference to the first child GameObject
+            // Debug.Log("The name of the first child GameObject is: " + firstChildGameObject.name);
+
+        }
     }
 
     void FixedUpdate()

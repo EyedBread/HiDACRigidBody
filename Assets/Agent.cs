@@ -9,6 +9,10 @@ using System;
 
 
 public class Agent : MonoBehaviour {
+
+    public bool useNAVMESHPATHFINDING = false;
+
+    public bool doRANDOMTASKS = true;
     public const float epsilon = 0.05f;
     [SerializeField] public NavMeshAgent dummyAgent;
     private List<Vector3> waypoints;
@@ -92,7 +96,7 @@ public class Agent : MonoBehaviour {
         //Other Agent Avoidance: Overtaking and bi-directional flow
         //that agent is walking in the opposite direction and with distance smaller than vislong-1.5
         // Debug.Log( "Dotproduct between the 2 velocities: " + Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized)) + " with vels " + vel.normalized + " and " + otherVel.normalized);
-        if (Vector2.Dot(otherVel.normalized, vel.normalized) > 0.8 && meToYou.magnitude > vislong - 1.5 ) {
+        if (Vector2.Dot(otherVel.normalized, vel.normalized) > 0.9f && meToYou.magnitude > vislong - 1.5 ) {
             return Vector2.zero;
         }
 
@@ -122,17 +126,18 @@ public class Agent : MonoBehaviour {
         Vector2 myDir = vel.normalized;
         Vector2 otherDir = otherVel.normalized;
     
-        if (Vector2.Dot(myDir, otherDir) >= 0.655f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
+        if (Vector2.Dot(myDir, otherDir) >= 0.655f && Vector2.Dot(myDir, meToYou.normalized) > 0.9f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
         {
             // Debug.Log(gameObject.name + "Is waiting!");
             waiting = true;
-            waitTime = rand.Next(1,50);
+            waitTime = rand.Next(1,10);
         }
         return tforce * distweight * dirweight;
     }
 
     // PushableObject pushableObject;
 
+    int denseTimer = 0;
 
     void Start()
     {
@@ -147,32 +152,36 @@ public class Agent : MonoBehaviour {
 
             // Now you have a reference to the first child GameObject
             // Debug.Log("The name of the first child GameObject is: " + firstChildGameObject.name);
-
-            dummyAgent = firstChildGameObject.GetComponent<NavMeshAgent>();
+            if (useNAVMESHPATHFINDING)
+                dummyAgent = firstChildGameObject.GetComponent<NavMeshAgent>();
         }
 
         //TODO : HARDCODED VALUES FOR CHECKING TIME.
+        if (doRANDOMTASKS) {
+            float x = UnityEngine.Random.Range(Margin, WorldX - Margin);
+            float y = UnityEngine.Random.Range(Margin, WorldY - Margin);
+            attractorFinalGoal = new Vector2(x, y);
+            // attractorFinalGoal = (Vector2) gameObject.transform.position;
+            attractor = attractorFinalGoal;
+        }
 
-        float x = UnityEngine.Random.Range(Margin, WorldX - Margin);
-        float y = UnityEngine.Random.Range(Margin, WorldY - Margin);
-        attractorFinalGoal = new Vector2(x, y);
-        // attractorFinalGoal = (Vector2) gameObject.transform.position;
-        attractor = attractorFinalGoal;
 
         // dummyAgent = this.GetComponent<NavMeshAgent>();
+        if (useNAVMESHPATHFINDING) {
+            if (dummyAgent == null)
+            {
+                Debug.LogError("Dummy agent is not assigned or does not have a NavMeshAgent component.");
+                return;
+            }
+            waypoints = new List<Vector3>();
+            // Debug.Log("Calling CalculateWaypoints from Start");
+            StartCoroutine(CalculateWaypoints());
+            previousTargetPosition = attractorFinalGoal;
 
-        if (dummyAgent == null)
-        {
-            Debug.LogError("Dummy agent is not assigned or does not have a NavMeshAgent component.");
-            return;
+            dummyAgent.updatePosition = false; // Prevent NavMeshAgent from controlling the GameObject's position
+            dummyAgent.updateRotation = false; // Prevent NavMeshAgent from controlling the GameObject's rotation
         }
-        waypoints = new List<Vector3>();
-        // Debug.Log("Calling CalculateWaypoints from Start");
-        StartCoroutine(CalculateWaypoints());
-        previousTargetPosition = attractorFinalGoal;
 
-        dummyAgent.updatePosition = false; // Prevent NavMeshAgent from controlling the GameObject's position
-        dummyAgent.updateRotation = false; // Prevent NavMeshAgent from controlling the GameObject's rotation
 
 
         pos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
@@ -209,47 +218,50 @@ public class Agent : MonoBehaviour {
             return;
         }
         
-        // Calculate waypoints when the target position changes
-        if (previousTargetPosition != attractorFinalGoal)
-        {
-            
-            StartCoroutine(CalculateWaypoints());
-            previousTargetPosition = attractorFinalGoal;
-            currentCornerIndex = 0;
-
-        }
-
-        // Use the waypoints as attractors in your HiDAC model
-        if (waypoints != null && currentCornerIndex < waypoints.Count)
-        {
-            Vector3 targetWayPoint = waypoints[currentCornerIndex];
-            // Use targetCorner as an attractor in your HiDAC model
-            attractor = targetWayPoint;
-
-            float distanceToCurrentWaypoint = Vector3.Distance(transform.position, targetWayPoint);
-            // Debug.Log("Distance to current waypoint: " + distanceToCurrentWaypoint);
-
-            // Check if the agent has reached the current corner
-            if (Vector3.Distance(transform.position, targetWayPoint) < 1)
+        if (useNAVMESHPATHFINDING) {
+            // Calculate waypoints when the target position changes
+            if (previousTargetPosition != attractorFinalGoal)
             {
-                // Debug.Log("Reached waypoint !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + currentCornerIndex);
-                currentCornerIndex++;
+                
+                StartCoroutine(CalculateWaypoints());
+                previousTargetPosition = attractorFinalGoal;
+                currentCornerIndex = 0;
+
+            }
+
+            // Use the waypoints as attractors in your HiDAC model
+            if (waypoints != null && currentCornerIndex < waypoints.Count)
+            {
+                Vector3 targetWayPoint = waypoints[currentCornerIndex];
+                // Use targetCorner as an attractor in your HiDAC model
+                attractor = targetWayPoint;
+
+                float distanceToCurrentWaypoint = Vector3.Distance(transform.position, targetWayPoint);
+                // Debug.Log("Distance to current waypoint: " + distanceToCurrentWaypoint);
+
+                // Check if the agent has reached the current corner
+                if (Vector3.Distance(transform.position, targetWayPoint) < 1)
+                {
+                    // Debug.Log("Reached waypoint !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + currentCornerIndex);
+                    currentCornerIndex++;
+                }
+            }
+            else if (currentCornerIndex == waypoints.Count) { //Reset finalGoal for new task
+                // Debug.Log("New waypoint");
+                // Generate random position within the specified constraints
+                float x = UnityEngine.Random.Range(Margin, WorldX - Margin);
+                float y = UnityEngine.Random.Range(Margin, WorldY - Margin);
+                attractorFinalGoal = new Vector2(x, y);
             }
         }
-        else if (currentCornerIndex == waypoints.Count) { //Reset finalGoal for new task
-            // Debug.Log("New waypoint");
-            // Generate random position within the specified constraints
-            float x = UnityEngine.Random.Range(Margin, WorldX - Margin);
-            float y = UnityEngine.Random.Range(Margin, WorldY - Margin);
-            attractorFinalGoal = new Vector2(x, y);
-        }
+        
 
         float lambda = 1.0f;
 
         Vector2 repelForceFromAgents = Vector2.zero;
         Vector2 repelForceFromWalls = Vector2.zero;
 
-        Vector2 currentForce = prevForce;
+        Vector2 currentForce = Vector2.zero;//prevForce.normalized;
 
         Vector2 currentRepelForce = Vector2.zero;
 
@@ -278,7 +290,7 @@ public class Agent : MonoBehaviour {
         if (panic)
             agentWeight = 10;
         else
-            agentWeight = 4;
+            agentWeight = 5;
         
         num_agents_ahead = fieldOfView.visibleAgents.Count;
         //but when the crowd is very dense, then the right preference is not so obvious and several bidirectional flows can emerge (Di/=2). 
@@ -287,13 +299,17 @@ public class Agent : MonoBehaviour {
             vislong = 1.5f;
             fieldOfView.visLong = 1.5f;
             rightHandAngleMultiplier = 0.1f;
-            panicMeter++; //
+            denseTimer = 20;
         }
-        else {
+        else if (denseTimer == 0) {
             vislong = 3;
             fieldOfView.visLong = 3;
             rightHandAngleMultiplier = 1.0f;
         }
+
+
+        if (denseTimer > 0)
+            denseTimer--;
 
 
 
@@ -343,7 +359,7 @@ public class Agent : MonoBehaviour {
         // }
 
         //CASE WALL ----------------------------------------------------------------
-        wallWeight = 8;
+        wallWeight = 15;
         foreach (Transform visibleWall in fieldOfView.visibleWalls)
         {
             // Debug.Log("SEE WALL");
@@ -362,7 +378,7 @@ public class Agent : MonoBehaviour {
             }
 
             Vector2 tempForce = GeometryUtils.CrossAndRecross(wallNorm, rb.velocity);
-            // tempForce.Normalize();
+            tempForce.Normalize();
             // Debug.Log(tempForce);
             tempForce *= wallWeight;
             currentForce += tempForce;
@@ -485,7 +501,7 @@ public class Agent : MonoBehaviour {
         {
             // Debug.Log("STOPPING");
             stopping = true;
-            stoptime = rand.Next(1,150);
+            stoptime = rand.Next(1,50);
             vel = Vector2.zero;
         }
 
@@ -506,6 +522,9 @@ public class Agent : MonoBehaviour {
         Vector2 move = moveFactor * ((1 - Beta)*currentForce + Beta*fallenAgentVec);
         // Vector2 desiredPosition = move + repelForce;
         rb.AddForce(currentForce);
+        if ( repelForce.magnitude > 0)
+            Debug.Log(gameObject + " RepelForce: " + repelForce);
+        rb.AddForce(repelForce.normalized);
 
         // Vector2 lastPos = transform.position;
         // rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime ); //+ 0.1f*repelForce

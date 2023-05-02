@@ -91,6 +91,7 @@ public class FieldOfView : MonoBehaviour
         myRadius = agentCollider.radius;
         allWalls = FindObjectsOfType<Wall>();
         myPersonalSpace = agent.getPersonalSpace();
+        // Debug.Log(myPersonalSpace);
 
     }
 
@@ -307,7 +308,7 @@ public class FieldOfView : MonoBehaviour
         Collider2D[] fallenAgentsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, fallenAgentMask);
         CheckVisibleAndCollidedObjects(fallenAgentsInRange, visibleFallenAgents, collidedAgents, true);
 
-        // DebugDrawBox((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, Color.yellow, 0.01f);
+        DebugDrawBox((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, Color.yellow, 0.01f);
 
         // Find walls in range
         Collider2D[] wallsInRange = Physics2D.OverlapBoxAll((Vector2)transform.position + myDir * visLong / 2, new Vector2(visLong, visWide), alpha, wallMask);

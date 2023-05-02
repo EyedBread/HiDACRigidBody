@@ -6,12 +6,41 @@ public class AgentCollisionHandler : MonoBehaviour
     [HideInInspector]
     public List<Transform> collidedObjects = new List<Transform>();
 
+    public float personalSpace;
+    public Agent agent;
+
+    public Rigidbody2D rb;
+
+    void Start() {
+        agent = GetComponent<Agent>();
+        personalSpace = agent.getPersonalSpace();
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Transform other = collision.transform;
-        if (!collidedObjects.Contains(other))
+
+        Agent otherAgent = collision.collider.GetComponent<Agent>();
+        if (otherAgent != null)
         {
-            collidedObjects.Add(other);
+            float otherPersonalSpace = otherAgent.getPersonalSpace();
+
+            if (personalSpace > otherPersonalSpace)
+            {
+                // Vector2 forceDirection = (transform.position - collision.transform.position).normalized;
+                // float forceMultiplier = otherPersonalSpace - personalSpace;
+                // float forceAmount = forceMultiplier * 50f; // Adjust this value to achieve desired pushing force
+
+                // rb.AddForce(forceDirection * forceAmount);
+                Transform other = collision.transform;
+                if (!collidedObjects.Contains(other))
+                {
+                    collidedObjects.Add(other);
+                }
+            }
+            else {
+
+            }
         }
     }
 

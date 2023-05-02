@@ -5341,9 +5341,9 @@ MonoBehaviour:
   DummyAgentPrefab: {fileID: 7920284820097666359, guid: 2847f15d2e11675478842b0784c8c27b, type: 3}
   agentManager: {fileID: 1448196120}
   NumberOfAgents: 400
-  WorldX: 100
-  WorldY: 85
-  Margin: 10
+  WorldX: 22
+  WorldY: 15
+  Margin: 1
 --- !u!4 &1764108315
 Transform:
   m_ObjectHideFlags: 0

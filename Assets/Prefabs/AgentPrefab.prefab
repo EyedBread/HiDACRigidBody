@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 511148570368174681}
   m_LocalRotation: {x: 0, y: 0, z: 0.08928541, w: 0.9960061}
   m_LocalPosition: {x: -1.0558841, y: -2.9287536, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.066016}
+  m_LocalScale: {x: 0.33, y: 0.33, z: 0.108926415}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,27 +49,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3f8a9271c2ae349a9a909d2a433c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNAVMESHPATHFINDING: 0
+  doRANDOMTASKS: 0
   dummyAgent: {fileID: 0}
   isFallen: 0
   repelsionMagThreshold: 10
   detectionRadius: 5
   rb: {fileID: 511148570368174693}
-  WorldX: 100
-  WorldY: 85
-  Margin: 10
+  WorldX: 22
+  WorldY: 15
+  Margin: 1
   R: 2
   attractorWeight: 4
   wallWeight: 1
   agentWeight: 1
   fallenWeight: 0.5
-  personalSpace: 0.02
+  personalSpace: 0
   acceleration: 1.23
   maxVelocity: 0.5
   radius: 0
-  waitingRadius: 2
+  waitingRadius: 0.8
   panic: 0
   vislong: 3
-  viswide: 1.5
+  viswide: 1
   attractor: {x: 1, y: 9}
   attractorFinalGoal: {x: 0, y: 0, z: 0}
 --- !u!212 &511148570368174692
@@ -140,7 +142,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7819b92cc55a71640819ab13f64c416e, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -174,6 +176,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collidedObjects: []
+  personalSpace: 0
+  agent: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &511148570368174680
 MonoBehaviour:
   m_ObjectHideFlags: 0
