@@ -42,6 +42,13 @@ public class AgentCollisionHandler : MonoBehaviour
 
             }
         }
+        else {
+            Transform other = collision.transform;
+            if (!collidedObjects.Contains(other))
+            {
+                collidedObjects.Add(other);
+            }
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision)

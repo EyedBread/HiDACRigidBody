@@ -68,7 +68,7 @@ MonoBehaviour:
   acceleration: 1.23
   maxVelocity: 0.5
   radius: 0
-  waitingRadius: 0.8
+  waitingRadius: 1
   panic: 0
   vislong: 3
   viswide: 1
