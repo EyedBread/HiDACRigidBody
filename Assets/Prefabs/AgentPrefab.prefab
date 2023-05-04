@@ -49,15 +49,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3f8a9271c2ae349a9a909d2a433c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useNAVMESHPATHFINDING: 0
+  useNAVMESHPATHFINDING: 1
   doRANDOMTASKS: 0
   dummyAgent: {fileID: 0}
   isFallen: 0
   repelsionMagThreshold: 10
   detectionRadius: 5
   rb: {fileID: 511148570368174693}
-  WorldX: 22
-  WorldY: 15
+  WorldX: 48
+  WorldY: -42
   Margin: 1
   R: 2
   attractorWeight: 4
@@ -72,8 +72,8 @@ MonoBehaviour:
   panic: 0
   vislong: 3
   viswide: 1
-  attractor: {x: 1, y: 9}
-  attractorFinalGoal: {x: 0, y: 0, z: 0}
+  attractor: {x: 0, y: 0}
+  attractorFinalGoal: {x: 44, y: 0, z: 0}
 --- !u!212 &511148570368174692
 SpriteRenderer:
   m_ObjectHideFlags: 0

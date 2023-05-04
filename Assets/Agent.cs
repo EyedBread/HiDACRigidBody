@@ -555,7 +555,7 @@ public class Agent : MonoBehaviour {
         float moveFactor = alpha*velMagnitude;
         Vector2 move = moveFactor * ((1 - Beta)*currentForce + Beta*fallenAgentVec);
         // Vector2 desiredPosition = move + repelForce;
-        rb.AddForce(currentForce + repelForce);
+        rb.AddForce(currentForce ); // + repelForce
         // if ( repelForce.magnitude > 0)
         //     Debug.Log(gameObject + " RepelForce: " + repelForce);
 
