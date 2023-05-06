@@ -53,7 +53,7 @@ MonoBehaviour:
   doRANDOMTASKS: 0
   dummyAgent: {fileID: 0}
   isFallen: 0
-  repelsionMagThreshold: 10
+  repelsionMagThreshold: 100000
   detectionRadius: 5
   rb: {fileID: 511148570368174693}
   WorldX: 48

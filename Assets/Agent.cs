@@ -140,7 +140,7 @@ public class Agent : MonoBehaviour {
         {
             // Debug.Log(gameObject.name + "Is waiting!");
             waiting = true;
-            waitTime = rand.Next(1,10);
+            waitTime = rand.Next(1,5);
         }
         return tforce * distweight * dirweight;
     }
@@ -283,10 +283,10 @@ public class Agent : MonoBehaviour {
         if (dist > 0) 
             attract.Normalize();
 
-        if (dist < 1.5)
+        if (dist < 3)
             attractorWeight = 35;
         else
-            attractorWeight = 10;
+            attractorWeight = 15;
 
         Vector2 forceAttractor = attract * attractorWeight;
         //Debug.Log("FORCEATTRACTOR: " + forceAttractor);
@@ -299,7 +299,7 @@ public class Agent : MonoBehaviour {
 
         //CASE AGENT --------------------------------------------------------------
         if (panic)
-            agentWeight = 10;
+            agentWeight = 8;
         else
             agentWeight = 5;
         
@@ -474,9 +474,9 @@ public class Agent : MonoBehaviour {
 
                 Vector2 currWallRepelForce = wallNorm * k;
 
-                if (gameObject.name == "AgentPrefab (43)") {
-                    Debug.Log(gameObject.name + " wallRepelForce: " + currWallRepelForce);
-                }
+                // if (gameObject.name == "AgentPrefab (43)") {
+                    // Debug.Log(gameObject.name + " wallRepelForce: " + currWallRepelForce);
+                // }
 
                 if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
                 {
@@ -484,6 +484,7 @@ public class Agent : MonoBehaviour {
                 }
             }
             else if (collidedAgentCircleCollider != null) {
+                // Debug.Log("Colliding with another agent!");
                 // i is this agent, j is the other agent
                 // d_ji is the distance between their centers
                 // ep is the person
@@ -530,12 +531,14 @@ public class Agent : MonoBehaviour {
         }
 
         // repelForceFromAgents = pushableObject.getAgentCollisionVec();
-
+        if (gameObject.name == "AgentPrefab (3)") {
+            Debug.Log("Vel: " + vel + ", repelForceFromAgents: " + repelForceFromAgents);
+        }
         if (Vector2.Dot(vel, repelForceFromAgents) < 0 && !panic)
         {
             // Debug.Log("STOPPING");
             stopping = true;
-            stoptime = rand.Next(1,50);
+            stoptime = rand.Next(1,10);
             vel = Vector2.zero;
         }
 
@@ -734,6 +737,7 @@ public class Agent : MonoBehaviour {
     }
 
     void becomePanicked() {
+        Debug.Log(gameObject.name + " is panicking!");
         maxVelocity *= 2;
         acceleration *= 3;
         personalSpace *= 0.6f; //Decrease personalspace to push other agents more easily

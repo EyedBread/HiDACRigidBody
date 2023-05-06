@@ -25,7 +25,7 @@ public class AgentCollisionHandler : MonoBehaviour
         {
             float otherPersonalSpace = otherAgent.getPersonalSpace();
 
-            if (personalSpace > otherPersonalSpace)
+            if (personalSpace >= otherPersonalSpace)
             {
                 // Vector2 forceDirection = (transform.position - collision.transform.position).normalized;
                 // float forceMultiplier = otherPersonalSpace - personalSpace;
