@@ -194,6 +194,7 @@ public class Agent : MonoBehaviour {
 
 
 
+
         pos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         // Debug.Log("Position: " + pos);
         rb = this.GetComponent<Rigidbody2D>();
@@ -256,7 +257,7 @@ public class Agent : MonoBehaviour {
                     currentCornerIndex++;
                 }
             }
-            else if (currentCornerIndex == waypoints.Count) { //Reset finalGoal for new task
+            else if (currentCornerIndex == waypoints.Count && doRANDOMTASKS) { //Reset finalGoal for new task
                 // Debug.Log("New waypoint");
                 // Generate random position within the specified constraints
                 float x = UnityEngine.Random.Range(Margin, WorldX - Margin);
@@ -306,8 +307,8 @@ public class Agent : MonoBehaviour {
         //but when the crowd is very dense, then the right preference is not so obvious and several bidirectional flows can emerge (Di/=2). 
         // Modifying the length of the collision avoidance rectangle and reducing the angle for right preference based on perceived density achieves this behavior. 
         if (num_agents_ahead > 8 ) {
-            vislong = 1.5f;
-            fieldOfView.visLong = 1.5f;
+            vislong = 3f/2;
+            fieldOfView.visLong = 3f/2;
             rightHandAngleMultiplier = 0.1f;
             denseTimer = 20;
         }

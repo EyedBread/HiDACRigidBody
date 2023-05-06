@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3f8a9271c2ae349a9a909d2a433c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useNAVMESHPATHFINDING: 1
+  useNAVMESHPATHFINDING: 0
   doRANDOMTASKS: 0
   dummyAgent: {fileID: 0}
   isFallen: 0
@@ -57,8 +57,8 @@ MonoBehaviour:
   detectionRadius: 5
   rb: {fileID: 511148570368174693}
   WorldX: 48
-  WorldY: -42
-  Margin: 1
+  WorldY: 44
+  Margin: 1.5
   R: 2
   attractorWeight: 4
   wallWeight: 1
@@ -71,9 +71,9 @@ MonoBehaviour:
   waitingRadius: 1
   panic: 0
   vislong: 3
-  viswide: 1
+  viswide: 1.5
   attractor: {x: 0, y: 0}
-  attractorFinalGoal: {x: 44, y: 0, z: 0}
+  attractorFinalGoal: {x: 43.55, y: 41.6, z: 0}
 --- !u!212 &511148570368174692
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -191,8 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6efd6de7ad12bcf4d8cfdf2d02cf498b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visLong: 3
-  visWide: 2
+  visLong: 1.5
+  visWide: 0.75
   myPersonalSpace: 0
   useNaive: 0
   myRadius: 0
