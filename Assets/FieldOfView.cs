@@ -123,7 +123,7 @@ public class FieldOfView : MonoBehaviour
         Vector2 myPos = agent.transform.position;
         float alpha = transform.eulerAngles.z;
         float alphaRadians = alpha * Mathf.Deg2Rad;
-        Vector2 myDir = new Vector2(Mathf.Cos(alphaRadians), Mathf.Sin(alphaRadians));
+        Vector2 myDir = agent.myDir;
         myDir.Normalize();
         
 
@@ -295,7 +295,7 @@ public class FieldOfView : MonoBehaviour
         // Direction of agent
         float alpha = transform.eulerAngles.z;
         float alphaRadians = alpha * Mathf.Deg2Rad;
-        Vector2 myDir = new Vector2(Mathf.Cos(alphaRadians), Mathf.Sin(alphaRadians));
+        Vector2 myDir = agent.myDir;
         myDir.Normalize();
 
         // Used to align direction vector myDir with the agent's field of view

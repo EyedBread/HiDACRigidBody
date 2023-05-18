@@ -55479,7 +55479,7 @@ MonoBehaviour:
   AgentPrefab: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
   DummyAgentPrefab: {fileID: 7920284820097666359, guid: 2847f15d2e11675478842b0784c8c27b, type: 3}
   agentManager: {fileID: 1432025032}
-  NumberOfAgents: 1000
+  NumberOfAgents: 100
   WorldX: 48
   WorldY: 44
   Margin: 2

@@ -21,6 +21,8 @@ public class Agent : MonoBehaviour {
 
     private FieldOfView fieldOfView;
 
+
+
     public bool isFallen = false;
 
     //The threshold in which the magnitude of the repulsionforce vector turns the agent into a fallen agent
@@ -100,9 +102,9 @@ public class Agent : MonoBehaviour {
         //Other Agent Avoidance: Overtaking and bi-directional flow
         //that agent is walking in the opposite direction and with distance smaller than vislong-1.5
         // Debug.Log( "Dotproduct between the 2 velocities: " + Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized)) + " with vels " + vel.normalized + " and " + otherVel.normalized);
-        if (Vector2.Dot(otherVel.normalized, vel.normalized) > 0.9f && meToYou.magnitude > vislong - 1.5 ) {
-            return Vector2.zero;
-        }
+        // if (Vector2.Dot(otherVel.normalized, vel.normalized) > 0.9f && Vector2.Dot(vel.normalized, meToYou.normalized) < 0.05f ) {
+        //     return Vector2.zero;
+        // }
 
 
         Vector2 tforce = GeometryUtils.CrossAndRecross(meToYou, vel);
@@ -126,15 +128,16 @@ public class Agent : MonoBehaviour {
         
         
         if (Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized) + 1) <= epsilon * rightHandAngleMultiplier &&
-            Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) - 1) <= epsilon * rightHandAngleMultiplier)
+            Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) - 1) <= epsilon * rightHandAngleMultiplier || 
+            (collidedList.Contains(visibleAgent) && Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) - 1) <= 4 * epsilon * rightHandAngleMultiplier))
         {
             // Debug.Log("RIGHT HAND RULE APPLIED FOR AGENT " + gameObject.name);
-            Vector2 rforce = Vector2.Perpendicular(vel.normalized); // Tangent to the right
-            tforce += rforce * 0.05f;
+            Vector2 rforce = Vector2.Perpendicular(vel.normalized); // Tangent to the left
+            tforce += rforce * 0.20f;
         }
 
-        Vector2 myDir = vel.normalized;
-        Vector2 otherDir = otherVel.normalized;
+        // Vector2 myDir = vel.normalized;
+        Vector2 otherDir = otherAgent.myDir;
     
         if (Vector2.Dot(myDir, otherDir) >= 0.655f && Vector2.Dot(myDir, meToYou.normalized) > 0.9f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
         {
@@ -151,6 +154,8 @@ public class Agent : MonoBehaviour {
 
     void Start()
     {
+
+        
         // Get the number of child GameObjects
         int childCount = transform.childCount;
 
@@ -174,6 +179,8 @@ public class Agent : MonoBehaviour {
             // attractorFinalGoal = (Vector2) gameObject.transform.position;
             attractor = attractorFinalGoal;
         }
+
+        myDir = attractor;
 
 
         // dummyAgent = this.GetComponent<NavMeshAgent>();
@@ -218,6 +225,7 @@ public class Agent : MonoBehaviour {
     public float WorldX = 10f;
     public float WorldY = 10f;
     public float Margin = 0.1f;
+    List<Transform> collidedList;
 
     // Update is called once per frame
     public void AgentFixedUpdate()
@@ -295,18 +303,18 @@ public class Agent : MonoBehaviour {
         fieldOfView.FindVisibleTargets();
 
         //Get all current collisions with agent
-        List<Transform> collidedList = agentCollisionHandler.collidedObjects;
+        collidedList = agentCollisionHandler.collidedObjects;
 
         //CASE AGENT --------------------------------------------------------------
         if (panic)
             agentWeight = 8;
         else
-            agentWeight = 5;
+            agentWeight = 6;
         
         num_agents_ahead = fieldOfView.visibleAgents.Count;
         //but when the crowd is very dense, then the right preference is not so obvious and several bidirectional flows can emerge (Di/=2). 
         // Modifying the length of the collision avoidance rectangle and reducing the angle for right preference based on perceived density achieves this behavior. 
-        if (num_agents_ahead > 8 ) {
+        if (num_agents_ahead > 6 ) {
             vislong = 3f/2;
             fieldOfView.visLong = 3f/2;
             rightHandAngleMultiplier = 0.1f;
@@ -455,7 +463,13 @@ public class Agent : MonoBehaviour {
         }
 
         //REPULSION FORCES
+
+        Collider2D[] colliderList = Physics2D.OverlapCircleAll(transform.position, agentCollider.radius); // For some reason this is slower to iterate through in the for each loop 
+        //COllidedList : taken from AgentCollisionHandler Script
+        
         foreach(Transform otherTransform in collidedList) {
+
+            // Transform otherTransform = otherCollider.gameObject.transform;
 
             BoxCollider2D wallCollider = otherTransform.GetComponent<BoxCollider2D>();
             CircleCollider2D collidedAgentCircleCollider = otherTransform.GetComponent<CircleCollider2D>();
@@ -498,8 +512,8 @@ public class Agent : MonoBehaviour {
                 float collidedAgentRadius = collidedAgentCircleCollider.radius;
                 
                 float k = (agentCollider.radius + personalSpace + collidedAgentRadius - jtoi.magnitude) / (jtoi.magnitude);
-
-                repelForceFromAgents += jtoi * k;
+                if (!otherAgent.stopping) //TEST : if the collided agent is like stopped, why bother? 
+                    repelForceFromAgents += jtoi * k;
             }
             
             else {
@@ -534,7 +548,7 @@ public class Agent : MonoBehaviour {
         if (gameObject.name == "AgentPrefab (3)") {
             Debug.Log("Vel: " + vel + ", repelForceFromAgents: " + repelForceFromAgents);
         }
-        if (Vector2.Dot(vel, repelForceFromAgents) < 0 && !panic)
+        if (Vector2.Dot(vel, repelForceFromAgents) < 0 && !panic && repelForceFromAgents.magnitude > 3 && collidedList.Count > 1)
         {
             // Debug.Log("STOPPING");
             stopping = true;
@@ -550,6 +564,8 @@ public class Agent : MonoBehaviour {
         if (currentForce.magnitude > 1)
             currentForce.Normalize(); //Normalize force vector
 
+        myDir = currentForce.normalized;
+
         prevForce = currentForce;
 
         //TIME TO APPLY FORCES
@@ -559,7 +575,7 @@ public class Agent : MonoBehaviour {
         float moveFactor = alpha*velMagnitude;
         Vector2 move = moveFactor * ((1 - Beta)*currentForce + Beta*fallenAgentVec);
         // Vector2 desiredPosition = move + repelForce;
-        rb.AddForce(currentForce ); // + repelForce
+        rb.AddForce(currentForce); // + repelForce
         // if ( repelForce.magnitude > 0)
         //     Debug.Log(gameObject + " RepelForce: " + repelForce);
 
@@ -567,8 +583,8 @@ public class Agent : MonoBehaviour {
         // rb.MovePosition((Vector2) (transform.position) + (move )*Time.fixedDeltaTime ); //+ 0.1f*repelForce
         // rb.MovePosition(Vector2.zero);
         vel = ( (Vector2)transform.position - lastPos ) / Time.fixedDeltaTime; 
-        Vector2 dir = vel.normalized;
-        float angleInRadians = Mathf.Atan2(dir.y, dir.x);
+        // Vector2 dir = vel.normalized;
+        float angleInRadians = Mathf.Atan2(myDir.y, myDir.x);
         float angleInDegrees = angleInRadians * Mathf.Rad2Deg;
         rb.MoveRotation(angleInDegrees); //TODO : Why doesn't this work????
         transform.rotation = Quaternion.Euler(0, 0, angleInDegrees);
@@ -599,6 +615,8 @@ public class Agent : MonoBehaviour {
         if (panicMeter > 0)
             panicMeter--;
     }
+
+    public LayerMask collisionLayer;
 
     private IEnumerator CalculateWaypoints()
     {
@@ -714,6 +732,8 @@ public class Agent : MonoBehaviour {
 
     // Attractor
     public Vector2 attractor;
+
+    public Vector2 myDir;
 
     // Attractor final goal
     [SerializeField]

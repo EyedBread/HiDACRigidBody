@@ -37,7 +37,8 @@ public class AgentCircleSpawner : MonoBehaviour
             Agent ag = agent.GetComponent<Agent>();
             ag.attractorFinalGoal = new Vector3(radius*Mathf.Cos(theta + Mathf.PI), radius*Mathf.Sin(theta + Mathf.PI), 0);
             ag.attractor = (Vector2) ag.attractorFinalGoal;
-            ag.personalSpace = i;
+            // ag.personalSpace = i;
+            // ag.maxVelocity += i*0.01f;
 
             theta += maxAngle / NumberOfAgents;
 

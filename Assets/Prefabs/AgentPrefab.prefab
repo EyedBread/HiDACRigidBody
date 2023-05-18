@@ -73,6 +73,7 @@ MonoBehaviour:
   vislong: 3
   viswide: 1.5
   attractor: {x: 0, y: 0}
+  myDir: {x: 0, y: 0}
   attractorFinalGoal: {x: 43.55, y: 41.6, z: 0}
 --- !u!212 &511148570368174692
 SpriteRenderer:

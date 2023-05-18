@@ -285,7 +285,7 @@ MonoBehaviour:
   DummyAgentPrefab: {fileID: 7920284820097666359, guid: 2847f15d2e11675478842b0784c8c27b, type: 3}
   agentManager: {fileID: 856325668}
   NumberOfAgents: 100
-  radius: 15
+  radius: 10
   theta: 0
 --- !u!4 &1580451004
 Transform:

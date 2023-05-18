@@ -210,6 +210,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -222,17 +226,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.940001
+      value: 7.9
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8599998
+      value: 0.8199998
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -277,6 +285,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -370,6 +382,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (55)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 47
@@ -431,8 +451,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -450,6 +474,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (54)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -517,7 +549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -541,6 +573,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -553,17 +589,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.010001
+      value: 3.9700007
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8599998
+      value: 0.8199998
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -609,6 +649,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!1001 &244729941
@@ -621,6 +665,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -688,7 +740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -742,6 +794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -754,17 +810,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.720001
+      value: 4.680001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13999985
+      value: 0.09999989
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -810,6 +870,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!1001 &434404631
@@ -822,6 +886,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -889,7 +961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -1014,6 +1086,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 45
@@ -1080,7 +1160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -1103,6 +1183,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (53)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -1165,8 +1253,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -1190,6 +1282,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1202,17 +1298,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.630002
+      value: 5.5900016
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5400001
+      value: -0.58000004
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1258,6 +1358,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!1001 &574897566
@@ -1270,6 +1374,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Constraints
@@ -1336,8 +1448,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -1356,6 +1472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1368,17 +1488,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.330001
+      value: 6.2900004
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.85999984
+      value: 0.8199999
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1423,6 +1547,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -1442,6 +1570,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1454,17 +1586,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.750001
+      value: 4.7100005
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5400001
+      value: -0.58000004
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1510,6 +1646,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!1001 &649516410
@@ -1522,6 +1662,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -1584,8 +1732,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -1688,6 +1840,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (64)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1700,17 +1856,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.96
+      value: 7.92
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.34
+      value: -1.38
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1755,6 +1915,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -1769,6 +1933,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (63)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1781,17 +1949,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.200001
+      value: 7.1600003
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3400002
+      value: -1.3800001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1836,6 +2008,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -1860,6 +2036,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1872,17 +2052,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.990001
+      value: 3.9500008
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5400001
+      value: -0.58000004
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1928,6 +2112,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!1001 &746399511
@@ -1940,6 +2128,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -2002,8 +2198,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2031,6 +2231,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -2093,8 +2301,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2112,6 +2324,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (57)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -2179,7 +2399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2202,6 +2422,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (46)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -2264,8 +2492,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2293,6 +2525,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -2355,8 +2595,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2380,6 +2624,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -2392,17 +2640,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.220001
+      value: 7.180001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.54000014
+      value: -0.5800001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2447,6 +2699,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -2466,6 +2722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -2478,17 +2738,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.960001
+      value: 3.9200006
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13999987
+      value: 0.099999905
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2533,6 +2797,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -2561,6 +2829,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -2623,8 +2899,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2642,6 +2922,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (56)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -2709,7 +2997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2743,6 +3031,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (59)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -2755,17 +3047,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.970001
+      value: 3.9300008
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3400002
+      value: -1.3800001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2810,6 +3106,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -2834,6 +3134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -2846,17 +3150,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.180001
+      value: 7.140001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8599998
+      value: 0.8199998
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2902,6 +3210,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!4 &1256664830 stripped
@@ -2924,6 +3236,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (49)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -2991,7 +3311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3014,6 +3334,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -3076,8 +3404,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3095,6 +3427,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (44)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -3162,7 +3502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3185,6 +3525,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -3247,8 +3595,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3266,6 +3618,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (58)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -3333,7 +3693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3361,6 +3721,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -3423,8 +3791,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3442,6 +3814,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -3504,8 +3884,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3529,6 +3913,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -3541,17 +3929,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.920001
+      value: 7.8800006
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13999987
+      value: 0.099999905
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3597,6 +3989,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!4 &1553682359 stripped
@@ -3614,6 +4010,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -3681,7 +4085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3700,6 +4104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -3712,17 +4120,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.77
+      value: 4.73
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8599998
+      value: 0.8199998
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3768,6 +4180,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!1001 &1602689984
@@ -3780,6 +4196,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -3847,7 +4271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3866,6 +4290,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -3878,17 +4306,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.160001
+      value: 7.1200004
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13999987
+      value: 0.099999905
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3933,6 +4365,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -3952,6 +4388,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -3964,17 +4404,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.550001
+      value: 5.5100007
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13999987
+      value: 0.099999905
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4019,6 +4463,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -4033,6 +4481,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -4045,17 +4497,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.310001
+      value: 6.270001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13999987
+      value: 0.099999905
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4100,6 +4556,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -4119,6 +4579,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -4131,17 +4595,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.390001
+      value: 6.350001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5400001
+      value: -0.58000004
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4187,6 +4655,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!1001 &1732383780
@@ -4199,6 +4671,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -4266,7 +4746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4285,6 +4765,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -4297,17 +4781,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.570002
+      value: 5.530001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8599998
+      value: 0.8199998
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4353,6 +4841,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!4 &1755481729 stripped
@@ -4375,6 +4867,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -4437,8 +4937,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4456,6 +4960,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (52)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -4518,8 +5030,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4568,6 +5084,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (60)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -4580,17 +5100,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.7300005
+      value: 4.69
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3400002
+      value: -1.3800001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4635,6 +5159,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
@@ -4649,6 +5177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (38)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -4661,17 +5193,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.9800005
+      value: 7.94
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5400001
+      value: -0.58000004
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4717,6 +5253,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!1001 &1939141615
@@ -4729,6 +5269,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -4796,7 +5344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4819,6 +5367,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -4886,7 +5442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4904,6 +5460,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (51)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -4966,8 +5530,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: maxVelocity
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4995,6 +5563,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -5062,7 +5638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -5096,6 +5672,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (62)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -5108,17 +5688,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.370001
+      value: 6.3300004
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3400002
+      value: -1.3800001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5164,6 +5748,10 @@ PrefabInstance:
       propertyPath: attractor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
 --- !u!1001 &2128224279
@@ -5176,6 +5764,14 @@ PrefabInstance:
     - target: {fileID: 511148570368174681, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Name
       value: AgentPrefab (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
@@ -5243,7 +5839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 3.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -5262,6 +5858,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (61)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174692, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -5274,17 +5874,21 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9245283
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174693, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_RootOrder
       value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.610002
+      value: 5.570001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3400002
+      value: -1.3800001
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174694, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5329,6 +5933,10 @@ PrefabInstance:
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: attractor.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: personalSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
