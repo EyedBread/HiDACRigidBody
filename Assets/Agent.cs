@@ -94,6 +94,7 @@ public class Agent : MonoBehaviour {
         Agent otherAgent = visibleAgent.GetComponent<Agent>();
             // Access the visible agent's velocity
         Vector2 otherVel = otherAgent.getVelocity();
+        Vector2 otherDir = otherAgent.myDir;
 
         // if (gameObject.name == "AgentPrefab (43)") {
         //         Debug.Log(gameObject.name + " vel: " + getVelocity() + ", " + visibleAgent.name + " vel: " + otherVel + ", meToYou: " + meToYou);
@@ -107,7 +108,7 @@ public class Agent : MonoBehaviour {
         // }
 
 
-        Vector2 tforce = GeometryUtils.CrossAndRecross(meToYou, vel);
+        Vector2 tforce = GeometryUtils.CrossAndRecross(meToYou, myDir);
         // if (gameObject.name == "AgentPrefab (43)") {
         //         Debug.Log(gameObject.name + " tforce: " + tforce);
         // }
@@ -121,29 +122,30 @@ public class Agent : MonoBehaviour {
         float distweight, dirweight;
         distweight = Mathf.Pow(meToYou.magnitude - vislong, 2);
 
-        if (Vector2.Dot(vel, otherVel) > 0)
+        if (Vector2.Dot(myDir, otherDir) > 0)
             dirweight = 1.2f;
         else
             dirweight = 2.4f;
         
         
-        if (Mathf.Abs(Vector2.Dot(vel.normalized, otherVel.normalized) + 1) <= epsilon * rightHandAngleMultiplier &&
-            Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) - 1) <= epsilon * rightHandAngleMultiplier || 
-            (collidedList.Contains(visibleAgent) && Mathf.Abs(Vector2.Dot(vel.normalized, meToYou.normalized) - 1) <= 4 * epsilon * rightHandAngleMultiplier))
+        if (Mathf.Abs(Vector2.Dot(myDir.normalized, otherDir.normalized) + 1) <= epsilon * rightHandAngleMultiplier &&
+            Mathf.Abs(Vector2.Dot(myDir.normalized, meToYou.normalized) - 1) <= epsilon * rightHandAngleMultiplier || 
+            (collidedList.Contains(visibleAgent) && Mathf.Abs(Vector2.Dot(myDir.normalized, meToYou.normalized) - 1) <= 4 * epsilon * rightHandAngleMultiplier))
         {
             // Debug.Log("RIGHT HAND RULE APPLIED FOR AGENT " + gameObject.name);
-            Vector2 rforce = Vector2.Perpendicular(vel.normalized); // Tangent to the left
-            tforce += rforce * 0.20f;
+            Vector2 rforce = Vector2.Perpendicular(myDir.normalized); // Tangent to the left
+            tforce += rforce * 0.05f;
         }
 
         // Vector2 myDir = vel.normalized;
-        Vector2 otherDir = otherAgent.myDir;
+        // Vector2 otherDir = otherAgent.myDir;
+
     
         if (Vector2.Dot(myDir, otherDir) >= 0.655f && Vector2.Dot(myDir, meToYou.normalized) > 0.9f && !panic && meToYou.magnitude < waitingRadius && waitTime <= 0)
         {
             // Debug.Log(gameObject.name + "Is waiting!");
             waiting = true;
-            waitTime = rand.Next(1,5);
+            waitTime = rand.Next(2,5);
         }
         return tforce * distweight * dirweight;
     }
@@ -280,7 +282,7 @@ public class Agent : MonoBehaviour {
         Vector2 repelForceFromAgents = Vector2.zero;
         Vector2 repelForceFromWalls = Vector2.zero;
 
-        Vector2 currentForce = Vector2.zero;//prevForce.normalized;
+        Vector2 currentForce = prevForce;//prevForce.normalized;
 
         Vector2 currentRepelForce = Vector2.zero;
 
@@ -404,7 +406,7 @@ public class Agent : MonoBehaviour {
                 // Debug.Log(wallNorm);
             }
 
-            Vector2 tempForce = GeometryUtils.CrossAndRecross(wallNorm, rb.velocity);
+            Vector2 tempForce = GeometryUtils.CrossAndRecross(wallNorm, myDir);
             if (tempForce.magnitude > 1)
                 tempForce.Normalize();
             // Debug.Log(tempForce);
@@ -452,7 +454,7 @@ public class Agent : MonoBehaviour {
                 Beta = 0.5f;
             }
 
-            Vector2 tempForce = GeometryUtils.CrossAndRecross(d, rb.velocity);
+            Vector2 tempForce = GeometryUtils.CrossAndRecross(d, myDir);
             if (tempForce.magnitude > 1)
                 tempForce.Normalize();
             tempForce *= fallenWeight;
@@ -464,9 +466,10 @@ public class Agent : MonoBehaviour {
 
         //REPULSION FORCES
 
-        Collider2D[] colliderList = Physics2D.OverlapCircleAll(transform.position, agentCollider.radius); // For some reason this is slower to iterate through in the for each loop 
+        Collider2D[] colliderList = Physics2D.OverlapCircleAll(transform.position, agentCollider.radius); // For some reason this is slower to iterate through in the for each loop
+        //keep this to simulate the time for collision detection 
         //COllidedList : taken from AgentCollisionHandler Script
-        
+
         foreach(Transform otherTransform in collidedList) {
 
             // Transform otherTransform = otherCollider.gameObject.transform;
@@ -492,7 +495,7 @@ public class Agent : MonoBehaviour {
                     // Debug.Log(gameObject.name + " wallRepelForce: " + currWallRepelForce);
                 // }
 
-                if (Vector2.Dot(currWallRepelForce,vel) <= 0.0f)
+                if (Vector2.Dot(currWallRepelForce,myDir) <= 0.0f)
                 {
                     repelForceFromWalls += currWallRepelForce;
                 }
@@ -542,17 +545,18 @@ public class Agent : MonoBehaviour {
             // Debug.Log(gameObject.name + " HAS FALLEN");
             rb.velocity = Vector2.zero;
             AgentFalls();
+            return;
         }
 
         // repelForceFromAgents = pushableObject.getAgentCollisionVec();
         if (gameObject.name == "AgentPrefab (3)") {
-            Debug.Log("Vel: " + vel + ", repelForceFromAgents: " + repelForceFromAgents);
+            Debug.Log("Vel: " + myDir + ", repelForceFromAgents: " + repelForceFromAgents);
         }
-        if (Vector2.Dot(vel, repelForceFromAgents) < 0 && !panic && repelForceFromAgents.magnitude > 3 && collidedList.Count > 1)
+        if (Vector2.Dot(myDir, repelForceFromAgents) < 0 && !panic ) //collidedList.Count > 1
         {
             // Debug.Log("STOPPING");
             stopping = true;
-            stoptime = rand.Next(1,10);
+            stoptime = rand.Next(5,10);
             vel = Vector2.zero;
         }
 
@@ -573,9 +577,9 @@ public class Agent : MonoBehaviour {
         
         float velMagnitude = computeVel(Time.fixedDeltaTime);
         float moveFactor = alpha*velMagnitude;
-        Vector2 move = moveFactor * ((1 - Beta)*currentForce + Beta*fallenAgentVec);
+        Vector2 move = moveFactor * ((1 - Beta)*currentForce.normalized + Beta*fallenAgentVec);
         // Vector2 desiredPosition = move + repelForce;
-        rb.AddForce(currentForce); // + repelForce
+        rb.AddForce(move); // + repelForce
         // if ( repelForce.magnitude > 0)
         //     Debug.Log(gameObject + " RepelForce: " + repelForce);
 

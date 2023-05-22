@@ -292,11 +292,16 @@ public class FieldOfView : MonoBehaviour
         visWide = agent.viswide;
         // Debug.Log("Yas");
 
-        // Direction of agent
+        // desired Direction of agent
         float alpha = transform.eulerAngles.z;
+        
         float alphaRadians = alpha * Mathf.Deg2Rad;
         Vector2 myDir = agent.myDir;
+        
         myDir.Normalize();
+        float angle = Mathf.Atan2(myDir.y, myDir.x) * Mathf.Rad2Deg;
+        alpha = angle;
+        alphaRadians = angle * Mathf.Deg2Rad;
 
         // Used to align direction vector myDir with the agent's field of view
 

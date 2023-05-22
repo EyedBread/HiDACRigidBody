@@ -398,7 +398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -609,7 +609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -698,7 +698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -879,7 +879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -1283,7 +1283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -1377,7 +1377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -1709,6 +1709,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AgentPrefab (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 511148570368174682, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 511148570368174683, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
       value: 0.73
@@ -1779,7 +1783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2252,7 +2256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2505,7 +2509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2763,7 +2767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -2852,7 +2856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3804,7 +3808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -3908,7 +3912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4149,7 +4153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4238,7 +4242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4470,7 +4474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4564,7 +4568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4653,7 +4657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4890,7 +4894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
@@ -4979,7 +4983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: personalSpace
-      value: 0.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 511148570368174695, guid: 4491b9b07bad0a7428a46eda22fc8d11, type: 3}
       propertyPath: waitingRadius
